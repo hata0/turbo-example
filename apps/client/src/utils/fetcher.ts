@@ -4,6 +4,9 @@ export type Init<TBody> = Omit<RequestInit, "body" | "method"> & {
   body?: TBody;
 };
 
+/**
+ * @deprecated openapi の生成したものを使うこと
+ */
 export const fetcher = async <TBody extends object>(
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS",
   path: RequestInfo | URL,
