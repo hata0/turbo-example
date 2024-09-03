@@ -2,6 +2,11 @@
   "name": "@packages/openapi",
   "version": "0.0.0",
   "private": true,
+  "exports": {
+    "./generated": "./src/generated/index.ts",
+    "./paths": "./src/paths/index.ts",
+    "./schemas": "./src/schemas/index.ts"
+  },
   "scripts": {
     "generate:code": "openapi-generator-cli generate -g typescript-fetch -i src/openapi-docs.yml -o src/generated --additional-properties=modelPropertyNaming=camelCase,supportsES6=true,withInterfaces=true,typescriptThreePlus=true"
   },
