@@ -1,11 +1,10 @@
-import { BACKEND_URL } from "@/constants/backend-url";
-import { fetcher } from "@/utils/fetcher";
+import { PostApi } from "@packages/openapi/generated";
 
-export * from "./type";
+import { BACKEND_URL } from "@/constants/backend-url";
+import { baseConfig } from "@/libs/openapi/base-config";
 
 export const createPath = () => `${BACKEND_URL}/posts`;
 
-export const getPosts = () =>
-  fetcher("GET", createPath(), {
-    cache: "no-store",
-  });
+const postApi = new PostApi(baseConfig);
+
+export const getPosts = () => postApi.postsGet();

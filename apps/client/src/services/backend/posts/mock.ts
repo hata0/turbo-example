@@ -1,12 +1,12 @@
 import { HttpResponse } from "msw";
 
-import { createPath, PostsData } from ".";
+import { createPath } from ".";
 
 import { httpHandlerFactory } from "@/libs/msw/httpHandlerFactory";
-import { POSTS } from "@/tests/mocks/posts";
+import { POSTS_RESPONSE } from "@/tests/mocks/posts-response";
 
 const path = createPath();
 
 export const getPostsHandler = httpHandlerFactory("get", path, () => {
-  return HttpResponse.json({ posts: POSTS } satisfies PostsData);
+  return HttpResponse.json(POSTS_RESPONSE);
 });

@@ -1,8 +1,8 @@
+import { PostsResponse } from "@packages/openapi/generated";
 import { HttpResponse } from "msw";
 
 import { Posts } from ".";
 
-import { PostsData } from "@/services/backend/posts";
 import { getPostsHandler } from "@/services/backend/posts/mock";
 import { Meta } from "@/tests/storybook/types/Meta";
 import { StoryObj } from "@/tests/storybook/types/StoryObj";
@@ -20,7 +20,7 @@ export const Empty: Story = {
           resolver: () => {
             return HttpResponse.json({
               posts: [],
-            } satisfies PostsData);
+            } satisfies PostsResponse);
           },
         }),
       ],
