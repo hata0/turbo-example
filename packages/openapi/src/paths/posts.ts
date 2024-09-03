@@ -36,7 +36,7 @@ export const getPostRoute = createRoute({
 
 export const listPostsRoute = createRoute({
   tags: ["post"],
-  method: "post",
+  method: "get",
   path: "/",
   summary: "ポスト一覧を取得",
   responses: {

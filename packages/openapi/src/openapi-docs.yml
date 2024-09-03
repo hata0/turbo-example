@@ -71,7 +71,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
   /posts:
-    post:
+    get:
       tags:
         - post
       summary: ポスト一覧を取得
