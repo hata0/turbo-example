@@ -17,12 +17,15 @@ import * as runtime from '../runtime';
 import type {
   ErrorResponse,
   PostResponse,
+  PostsResponse,
 } from '../models/index';
 import {
     ErrorResponseFromJSON,
     ErrorResponseToJSON,
     PostResponseFromJSON,
     PostResponseToJSON,
+    PostsResponseFromJSON,
+    PostsResponseToJSON,
 } from '../models/index';
 
 export interface PostsIdGetRequest {
@@ -50,6 +53,20 @@ export interface PostApiInterface {
      * ポストを取得
      */
     postsIdGet(requestParameters: PostsIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostResponse>;
+
+    /**
+     * 
+     * @summary ポスト一覧を取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApiInterface
+     */
+    postsPostRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PostsResponse>>;
+
+    /**
+     * ポスト一覧を取得
+     */
+    postsPost(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostsResponse>;
 
 }
 
@@ -88,6 +105,32 @@ export class PostApi extends runtime.BaseAPI implements PostApiInterface {
      */
     async postsIdGet(requestParameters: PostsIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostResponse> {
         const response = await this.postsIdGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * ポスト一覧を取得
+     */
+    async postsPostRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PostsResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/posts`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PostsResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * ポスト一覧を取得
+     */
+    async postsPost(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostsResponse> {
+        const response = await this.postsPostRaw(initOverrides);
         return await response.value();
     }
 
