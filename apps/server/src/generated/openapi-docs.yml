@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Tutorial API
+components:
+  schemas:
+    PostResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: foo
+        title:
+          type: string
+          example: Sample post 1
+        body:
+          type: string
+          example: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            condimentum feugiat nunc, id elementum nulla venenatis ut. Praesent
+            non nunc ultrices, consequat arcu sit amet, auctor lacus. Maecenas
+            libero sem, tincidunt ut sapien quis, elementum vehicula augue. Cras
+            non cursus nulla. Suspendisse congue posuere accumsan. Vivamus ut
+            sollicitudin ligula. In viverra tellus vel porttitor feugiat. Ut
+            bibendum turpis sed mauris egestas ultricies.
+      required:
+        - name
+        - title
+        - body
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Bad Request
+      required:
+        - message
+  parameters: {}
+paths:
+  /posts/{id}:
+    get:
+      summary: ポストを取得
+      parameters:
+        - schema:
+            type: string
+            example: "1"
+          required: true
+          name: id
+          in: path
+      responses:
+        "200":
+          description: ポストを返す
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostResponse"
+        "400":
+          description: エラーを返す
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
