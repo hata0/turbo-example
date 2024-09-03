@@ -7,6 +7,7 @@ import {
 import { ErrorResponseSchema } from "../schemas/error";
 
 export const getPostRoute = createRoute({
+  tags: ["post"],
   method: "get",
   path: "/{id}",
   summary: "ポストを取得",
@@ -34,6 +35,7 @@ export const getPostRoute = createRoute({
 });
 
 export const listPostsRoute = createRoute({
+  tags: ["post"],
   method: "post",
   path: "/",
   summary: "ポスト一覧を取得",

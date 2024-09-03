@@ -14,7 +14,11 @@
       "cache": false,
       "persistent": true
     },
-    "generate:docs": {},
-    "generate:code": {}
+    "generate:docs": {
+      "cache": false
+    },
+    "generate:code": {
+      "cache": false
+    }
   }
 }

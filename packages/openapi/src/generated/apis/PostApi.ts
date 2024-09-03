@@ -30,19 +30,19 @@ export interface PostsIdGetRequest {
 }
 
 /**
- * DefaultApi - interface
+ * PostApi - interface
  * 
  * @export
- * @interface DefaultApiInterface
+ * @interface PostApiInterface
  */
-export interface DefaultApiInterface {
+export interface PostApiInterface {
     /**
      * 
      * @summary ポストを取得
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApiInterface
+     * @memberof PostApiInterface
      */
     postsIdGetRaw(requestParameters: PostsIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PostResponse>>;
 
@@ -56,7 +56,7 @@ export interface DefaultApiInterface {
 /**
  * 
  */
-export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
+export class PostApi extends runtime.BaseAPI implements PostApiInterface {
 
     /**
      * ポストを取得

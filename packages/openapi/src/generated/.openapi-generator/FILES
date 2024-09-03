@@ -1,5 +1,5 @@
 .openapi-generator-ignore
-apis/DefaultApi.ts
+apis/PostApi.ts
 apis/index.ts
 index.ts
 models/ErrorResponse.ts

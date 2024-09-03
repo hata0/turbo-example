@@ -38,6 +38,8 @@ components:
 paths:
   /posts/{id}:
     get:
+      tags:
+        - post
       summary: ポストを取得
       parameters:
         - schema:
