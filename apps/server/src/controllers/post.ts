@@ -1,10 +1,10 @@
+import { getPostHandler } from "@/handlers/post";
 import {
   ErrorResponse,
   PostRequestSchema,
   PostResponseSchema,
 } from "@packages/openapi/schemas";
 import { Context } from "hono";
-import { getPostHandler } from "../handlers/post";
 
 export const getPostController = (c: Context) => {
   const validationResult = PostRequestSchema.safeParse(c.req.param());

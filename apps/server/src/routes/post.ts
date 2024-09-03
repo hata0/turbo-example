@@ -1,6 +1,6 @@
+import { getPostController } from "@/controllers/post";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { getPostRoute } from "@packages/openapi/paths";
-import { getPostController } from "../controllers/post";
 
 const postApi = new OpenAPIHono();
 
