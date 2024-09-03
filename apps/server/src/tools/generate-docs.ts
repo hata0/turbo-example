@@ -12,7 +12,10 @@ const docs = app.getOpenAPIDocument({
 
 const fileContent = yaml.stringify(docs);
 
-const path = join(__dirname, "../generated/openapi-docs.yml");
+const path = join(
+  __dirname,
+  "../../../../packages/openapi/src/openapi-docs.yml",
+);
 
 writeFileSync(path, fileContent, {
   encoding: "utf-8",

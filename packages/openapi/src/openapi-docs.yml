@@ -34,15 +34,6 @@ components:
           example: Bad Request
       required:
         - message
-    PostsResponse:
-      type: object
-      properties:
-        posts:
-          type: array
-          items:
-            $ref: "#/components/schemas/PostResponse"
-      required:
-        - posts
   parameters: {}
 paths:
   /posts/{id}:
@@ -68,13 +59,3 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /posts:
-    post:
-      summary: ポスト一覧を取得
-      responses:
-        "200":
-          description: ポスト一覧を持つオブジェクトを返す
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PostsResponse"

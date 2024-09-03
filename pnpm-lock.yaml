@@ -205,6 +205,9 @@ importers:
       '@openapitools/openapi-generator-cli':
         specifier: ^2.13.5
         version: 2.13.5
+      '@types/node':
+        specifier: ^22.5.2
+        version: 22.5.2
 
   packages/typescript-config: {}
 
