@@ -1,0 +1,16 @@
+{
+  "name": "@packages/openapi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "generate:code": "openapi-generator-cli generate -g typescript-fetch -i src/openapi-docs.yml -o src/generated --additional-properties=modelPropertyNaming=camelCase,supportsES6=true,withInterfaces=true,typescriptThreePlus=true"
+  },
+  "dependencies": {
+    "@hono/zod-openapi": "^0.16.0",
+    "hono": "^4.5.10",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.13.5"
+  }
+}
