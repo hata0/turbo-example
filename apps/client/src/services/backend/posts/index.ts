@@ -7,4 +7,7 @@ export const createPath = () => `${BACKEND_URL}/posts`;
 
 const postApi = new PostApi(baseConfig);
 
-export const getPosts = () => postApi.postsGet();
+export const getPosts = () =>
+  postApi.postsGet({
+    cache: "no-store",
+  });
