@@ -1,6 +1,6 @@
+import { postApi } from "@/routes/post";
 import { swaggerUI } from "@hono/swagger-ui";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { postApi } from "@/routes/post";
 
 const app = new OpenAPIHono();
 

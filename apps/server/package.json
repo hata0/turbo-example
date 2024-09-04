@@ -6,9 +6,7 @@
     "dev": "tsx watch src/index.ts",
     "generate:docs": "tsx src/tools/generate-docs.ts",
     "lint": "biome check .",
-    "lint:pre-push": "biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
-    "fix": "biome check --fix --unsafe .",
-    "fix:pre-commit": "biome check --fix --unsafe --no-errors-on-unmatched --files-ignore-unknown=true ."
+    "fix": "biome check --fix --unsafe ."
   },
   "keywords": [],
   "author": "",

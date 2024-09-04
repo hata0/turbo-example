@@ -5,7 +5,9 @@
 		"build": "turbo build",
 		"dev": "turbo dev",
 		"generate:docs": "turbo generate:docs",
-		"generate:code": "turbo generate:code"
+		"generate:code": "turbo generate:code",
+		"lint": "turbo lint",
+		"fix": "turbo fix"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.8.3",
