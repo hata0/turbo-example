@@ -1,19 +1,19 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
-  "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "lint:pre-push": { "cache": false },
-    "fix:pre-commit": { "cache": false },
-    "generate:docs": { "cache": false },
-    "generate:code": { "cache": false }
-  }
+	"$schema": "https://turbo.build/schema.json",
+	"ui": "tui",
+	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"inputs": ["$TURBO_DEFAULT$", ".env*"],
+			"outputs": [".next/**", "!.next/cache/**"]
+		},
+		"dev": {
+			"cache": false,
+			"persistent": true
+		},
+		"lint:pre-push": { "dependsOn": ["^lint:pre-push"], "cache": false },
+		"fix:pre-commit": { "dependsOn": ["^fix:pre-commit"], "cache": false },
+		"generate:docs": { "cache": false },
+		"generate:code": { "cache": false }
+	}
 }
