@@ -4,8 +4,6 @@
 	"scripts": {
 		"build": "turbo build",
 		"dev": "turbo dev",
-		"lint:pre-push": "turbo lint:pre-push",
-		"fix:pre-commit": "turbo fix:pre-commit",
 		"generate:docs": "turbo generate:docs",
 		"generate:code": "turbo generate:code"
 	},
