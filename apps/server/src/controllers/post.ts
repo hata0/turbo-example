@@ -1,11 +1,7 @@
 import { getPostHandler, listPostHandler } from "@/handlers/post";
-import {
-  ErrorResponse,
-  PostRequestSchema,
-  PostResponseSchema,
-  PostsResponseSchema,
-} from "@packages/openapi/schemas";
-import { Context } from "hono";
+import type { ErrorResponse } from "@/openapi/schemas/error";
+import { PostRequestSchema, PostResponseSchema, PostsResponseSchema } from "@/openapi/schemas/post";
+import type { Context } from "hono";
 
 export const getPostController = (c: Context) => {
   const validationResult = PostRequestSchema.safeParse(c.req.param());

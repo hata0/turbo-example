@@ -4,7 +4,11 @@
   "description": "",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "generate:docs": "tsx src/tools/generate-docs.ts"
+    "generate:docs": "tsx src/tools/generate-docs.ts",
+    "lint": "biome check .",
+    "lint:pre-push": "biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
+    "fix": "biome check --fix --unsafe .",
+    "fix:pre-commit": "biome check --fix --unsafe --no-errors-on-unmatched --files-ignore-unknown=true ."
   },
   "keywords": [],
   "author": "",
@@ -13,7 +17,6 @@
     "@hono/node-server": "^1.12.2",
     "@hono/swagger-ui": "^0.4.1",
     "@hono/zod-openapi": "^0.16.0",
-    "@packages/openapi": "workspace:^",
     "hono": "^4.5.10",
     "zod": "^3.23.8"
   },

@@ -1,4 +1,4 @@
-import { PostResponse, PostsResponse } from "@packages/openapi/schemas";
+import type { PostResponse, PostsResponse } from "@/openapi/schemas/post";
 
 export const getPostHandler = (): PostResponse => {
   return {

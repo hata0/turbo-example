@@ -1,7 +1,7 @@
+import { writeFileSync } from "node:fs";
+import { join } from "node:path";
 import yaml from "yaml";
-import { writeFileSync } from "fs";
 import { app } from "../main";
-import { join } from "path";
 
 console.log("generating openapi docs");
 
@@ -12,10 +12,7 @@ const docs = app.getOpenAPIDocument({
 
 const fileContent = yaml.stringify(docs);
 
-const path = join(
-  __dirname,
-  "../../../../packages/openapi/src/openapi-docs.yml",
-);
+const path = join(__dirname, "../../../../packages/openapi/src/openapi-docs.yml");
 
 writeFileSync(path, fileContent, {
   encoding: "utf-8",

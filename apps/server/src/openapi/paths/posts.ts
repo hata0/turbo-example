@@ -1,10 +1,6 @@
 import { createRoute } from "@hono/zod-openapi";
-import {
-  PostRequestSchema,
-  PostResponseSchema,
-  PostsResponseSchema,
-} from "../schemas/post";
 import { ErrorResponseSchema } from "../schemas/error";
+import { PostRequestSchema, PostResponseSchema, PostsResponseSchema } from "../schemas/post";
 
 export const getPostRoute = createRoute({
   tags: ["post"],
