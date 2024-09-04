@@ -1,6 +1,6 @@
-import { Meta as MetaPrimitive } from "@storybook/react";
+import type { Meta as MetaPrimitive } from "@storybook/react";
 
-import { Parameters } from "./Parameters";
+import type { Parameters } from "./Parameters";
 
 export type Meta<T> = {
   parameters?: Parameters;

@@ -7,18 +7,13 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
     "dev": {
       "cache": false,
       "persistent": true
     },
-    "generate:docs": {
-      "cache": false
-    },
-    "generate:code": {
-      "cache": false
-    }
+    "lint:pre-push": { "cache": false },
+    "fix:pre-commit": { "cache": false },
+    "generate:docs": { "cache": false },
+    "generate:code": { "cache": false }
   }
 }

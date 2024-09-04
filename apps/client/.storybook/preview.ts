@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 import "../src/app/globals.css";
-import { initialize, mswLoader } from "msw-storybook-addon";
 import { withThemeByClassName } from "@storybook/addon-themes";
+import { initialize, mswLoader } from "msw-storybook-addon";
 import { DefaultDecorator } from "../src/tests/storybook/decorators/DefaultDecorator";
 
 initialize({ onUnhandledRequest: "bypass" });

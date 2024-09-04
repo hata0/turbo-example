@@ -1,5 +1,5 @@
-import { HttpHandler } from "msw";
-import { NextRouter } from "next/router";
+import type { HttpHandler } from "msw";
+import type { NextRouter } from "next/router";
 
 export type Parameters = {
   nextjs?: {

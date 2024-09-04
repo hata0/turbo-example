@@ -11,8 +11,8 @@ export const Custom500 = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center space-y-8">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-6xl font-bold">500</h1>
-        <h2 className="text-4xl font-medium">サーバー側で問題が発生しました。</h2>
+        <h1 className="font-bold text-6xl">500</h1>
+        <h2 className="font-medium text-4xl">サーバー側で問題が発生しました。</h2>
       </div>
       <div className="flex items-center justify-center space-x-6">
         <Button asChild>

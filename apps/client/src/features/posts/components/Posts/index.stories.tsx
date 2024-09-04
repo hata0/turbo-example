@@ -1,11 +1,11 @@
-import { PostsResponse } from "@packages/openapi/generated";
+import type { PostsResponse } from "@packages/openapi/generated";
 import { HttpResponse } from "msw";
 
 import { Posts } from ".";
 
 import { getPostsHandler } from "@/services/backend/posts/mock";
-import { Meta } from "@/tests/storybook/types/Meta";
-import { StoryObj } from "@/tests/storybook/types/StoryObj";
+import type { Meta } from "@/tests/storybook/types/Meta";
+import type { StoryObj } from "@/tests/storybook/types/StoryObj";
 
 type T = typeof Posts;
 type Story = StoryObj<T>;

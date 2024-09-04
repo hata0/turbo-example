@@ -1,13 +1,13 @@
-import { ReactRenderer } from "@storybook/react";
+import type { ReactRenderer } from "@storybook/react";
 import {
-  defaultShouldDehydrateQuery,
-  isServer,
   QueryClient,
   QueryClientProvider,
+  defaultShouldDehydrateQuery,
+  isServer,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useEffect } from "react";
-import { Args, PartialStoryFn } from "storybook/internal/types";
+import type { Args, PartialStoryFn } from "storybook/internal/types";
 
 export const DefaultDecorator = (Story: PartialStoryFn<ReactRenderer, Args>) => {
   const client = getQueryClient();
@@ -44,8 +44,7 @@ let browserQueryClient: QueryClient | undefined = undefined;
 const getQueryClient = () => {
   if (isServer) {
     return makeQueryClient();
-  } else {
-    if (!browserQueryClient) browserQueryClient = makeQueryClient();
-    return browserQueryClient;
   }
+  if (!browserQueryClient) browserQueryClient = makeQueryClient();
+  return browserQueryClient;
 };

@@ -6,6 +6,10 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
+    "lint": "biome check .",
+    "lint:pre-push": "biome check --no-errors-on-unmatched --files-ignore-unknown=true .",
+    "fix": "biome check --fix --unsafe .",
+    "fix:pre-commit": "biome check --fix --unsafe --no-errors-on-unmatched --files-ignore-unknown=true .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -47,8 +51,6 @@
     "typescript": "^5"
   },
   "msw": {
-    "workerDirectory": [
-      "public"
-    ]
+    "workerDirectory": ["public"]
   }
 }

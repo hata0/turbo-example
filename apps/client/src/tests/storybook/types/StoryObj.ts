@@ -1,6 +1,6 @@
-import { StoryObj as StoryObjPrimitive } from "@storybook/react";
+import type { StoryObj as StoryObjPrimitive } from "@storybook/react";
 
-import { Parameters } from "./Parameters";
+import type { Parameters } from "./Parameters";
 
 export type StoryObj<T> = {
   parameters?: Parameters;

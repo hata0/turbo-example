@@ -1,4 +1,4 @@
-import { http, HttpResponse, HttpResponseResolver } from "msw";
+import { http, HttpResponse, type HttpResponseResolver } from "msw";
 
 type HandlerFactoryArgs = {
   isNetworkError?: boolean;
@@ -18,18 +18,18 @@ export const httpHandlerFactory = (
       return http[method](path, () => {
         return HttpResponse.error();
       });
-    } else if (error) {
+    }
+    if (error) {
       return http[method](path, () => {
         return HttpResponse.json(null, {
           status: error.status,
         });
       });
-    } else {
-      return http[method](path, async (args) => {
-        await baseResolver(args);
-        return (await resolver?.(args)) ?? (await defaultResolver(args));
-      });
     }
+    return http[method](path, async (args) => {
+      await baseResolver(args);
+      return (await resolver?.(args)) ?? (await defaultResolver(args));
+    });
   };
 };
 

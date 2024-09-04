@@ -1,21 +1,22 @@
 {
-  "name": "turbo-tutorial",
-  "private": true,
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "generate:docs": "turbo generate:docs",
-    "generate:code": "turbo generate:code"
-  },
-  "devDependencies": {
-    "prettier": "^3.2.5",
-    "turbo": "^2.1.1",
-    "typescript": "^5.4.5"
-  },
-  "packageManager": "pnpm@8.15.6",
-  "engines": {
-    "node": ">=18"
-  }
+	"name": "turbo-tutorial",
+	"private": true,
+	"scripts": {
+		"build": "turbo build",
+		"dev": "turbo dev",
+		"lint:pre-push": "turbo lint:pre-push",
+		"fix:pre-commit": "turbo fix:pre-commit",
+		"generate:docs": "turbo generate:docs",
+		"generate:code": "turbo generate:code"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.8.3",
+		"lefthook": "^1.7.15",
+		"turbo": "^2.1.1",
+		"typescript": "^5.4.5"
+	},
+	"packageManager": "pnpm@8.15.6",
+	"engines": {
+		"node": ">=18"
+	}
 }

@@ -1,4 +1,4 @@
-import { QueryFunction, queryOptions } from "@tanstack/react-query";
+import { type QueryFunction, queryOptions } from "@tanstack/react-query";
 
 type Props<TQueryFnData> = {
   queryKey: string[];
