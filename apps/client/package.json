@@ -6,7 +6,7 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "biome check .",
+    "lint": "biome check . && tsc --incremental false --noEmit",
     "fix": "biome check --fix --unsafe .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

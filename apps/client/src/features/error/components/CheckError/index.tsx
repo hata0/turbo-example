@@ -1,7 +1,6 @@
 "use client";
 
-import { type FetchError, type RequiredError, ResponseError } from "@packages/openapi/generated";
-
+import { type FetchError, type RequiredError, ResponseError } from "@packages/openapi";
 import { Custom401 } from "../401";
 import { Custom500 } from "../500";
 import { UnexpectedError } from "../UnexpectedError";

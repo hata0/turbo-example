@@ -1,4 +1,4 @@
-import type { PostsResponse } from "@packages/openapi/generated";
+import type { PostsResponse } from "@packages/openapi";
 
 export const POSTS_RESPONSE: PostsResponse = {
   posts: [

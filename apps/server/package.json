@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "generate:docs": "tsx src/tools/generate-docs.ts",
-    "lint": "biome check .",
+    "lint": "biome check . && tsc --incremental false --noEmit",
     "fix": "biome check --fix --unsafe ."
   },
   "keywords": [],
