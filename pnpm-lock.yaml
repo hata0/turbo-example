@@ -153,16 +153,6 @@ importers:
         version: 2.5.0
 
   packages/openapi:
-    dependencies:
-      '@hono/zod-openapi':
-        specifier: ^0.16.0
-        version: 0.16.0(hono@4.5.11)(zod@3.23.8)
-      hono:
-        specifier: ^4.5.10
-        version: 4.5.11
-      zod:
-        specifier: ^3.23.8
-        version: 3.23.8
     devDependencies:
       '@openapitools/openapi-generator-cli':
         specifier: ^2.13.5
