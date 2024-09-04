@@ -2,11 +2,11 @@ pre-commit:
   parallel: true
   commands:
     client:
-      root: "apps/client"
+      root: "apps/client/"
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: pnpm fix:pre-commit && git update-index --again
     server:
-      root: "apps/server"
+      root: "apps/server/"
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: pnpm fix:pre-commit && git update-index --again
 
