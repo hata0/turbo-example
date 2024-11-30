@@ -1,9 +1,8 @@
 import { postApi } from "@/routes/post";
-import { swaggerUI } from "@hono/swagger-ui";
-import { OpenAPIHono } from "@hono/zod-openapi";
+import { Hono } from "hono";
 import { cors } from "hono/cors";
 
-const app = new OpenAPIHono();
+const app = new Hono();
 
 app.use(
   "*",
@@ -15,16 +14,10 @@ app.use(
   }),
 );
 
-app.route("/posts", postApi);
-
-app.doc("/doc", {
-  openapi: "3.0.0",
-  info: {
-    version: "1.0.0",
-    title: "Tutorial API",
-  },
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
 });
 
-app.get("/ui", swaggerUI({ url: "/doc" }));
+app.route("/posts", postApi);
 
 export { app };
