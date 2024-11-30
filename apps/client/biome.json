@@ -1,6 +1,6 @@
 {
   "extends": ["../../biome.json"],
   "files": {
-    "ignore": [".next", "src/components/shadcn"]
+    "ignore": [".next", "src/components/shadcn", "src/gen"]
   }
 }

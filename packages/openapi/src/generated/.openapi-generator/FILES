@@ -1,9 +1,0 @@
-.openapi-generator-ignore
-apis/PostApi.ts
-apis/index.ts
-index.ts
-models/ErrorResponse.ts
-models/PostResponse.ts
-models/PostsResponse.ts
-models/index.ts
-runtime.ts
