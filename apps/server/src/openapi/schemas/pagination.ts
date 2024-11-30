@@ -2,8 +2,8 @@ import { z } from "@hono/zod-openapi";
 
 export const PaginationQuerySchema = z
   .object({
-    limit: z.number().openapi({ example: 5 }),
-    page: z.number().openapi({ example: 2 }),
+    limit: z.coerce.number().openapi({ example: 5 }),
+    page: z.coerce.number().openapi({ example: 2 }),
   })
   .openapi("PaginationQuery");
 export type PaginationQuery = z.infer<typeof PaginationQuerySchema>;

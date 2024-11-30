@@ -30,7 +30,7 @@ export type Post = z.infer<typeof PostSchema>;
 
 export const PostResponseSchema = z
   .object({
-    post: PostSchema,
+    post: PostSchema.nullable(),
   })
   .openapi("PostResponse");
 export type PostResponse = z.infer<typeof PostResponseSchema>;

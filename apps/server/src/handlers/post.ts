@@ -1,13 +1,21 @@
+import {
+  CreatePostBodySchema,
+  DeleteManyPostBodySchema,
+  PostParamsSchema,
+  PostResponseSchema,
+  PostSchema,
+  PostsQuerySchema,
+  UpdatePostBodySchema,
+} from "@/openapi/schemas/post";
 import { Prisma, PrismaClient } from "@prisma/client";
 import type { Context } from "hono";
 import { fromPromise } from "neverthrow";
 
 export class PostHandler {
   async list(c: Context) {
-    const query = c.req.query();
-    const limit = Number(query.limit)
-    const page = Number(query.page)
-    const sort = query.sort
+    const validationQuery = PostsQuerySchema.parse(c.req.query());
+
+    const { limit, page, sort } = validationQuery;
 
     const prisma = new PrismaClient();
 
@@ -32,7 +40,7 @@ export class PostHandler {
 
     return c.json(
       {
-        posts,
+        posts: posts.map((post) => PostSchema.parse(post)),
         pagination: {
           currentPage: page,
           totalPage,
@@ -44,7 +52,9 @@ export class PostHandler {
   }
 
   async get(c: Context) {
-    const id = c.req.param("id");
+    const validationParam = PostParamsSchema.parse(c.req.param());
+
+    const { id } = validationParam;
 
     const prisma = new PrismaClient();
     const post = await prisma.post.findUnique({
@@ -53,30 +63,40 @@ export class PostHandler {
       },
     });
 
-    return c.json({ post }, 200);
+    return c.json(PostResponseSchema.parse({ post }), 200);
   }
 
   async create(c: Context) {
-    const body = await c.req.json();
+    const validationBody = CreatePostBodySchema.parse(await c.req.json());
 
     const prisma = new PrismaClient();
-    const post = await prisma.post.create({
-      data: body,
-    });
+    const res = await fromPromise(
+      prisma.post.create({
+        data: validationBody,
+      }),
+      (e) => e,
+    );
 
-    return c.json({ post }, 200);
+    if (res.isErr()) {
+      if (res.error instanceof Prisma.PrismaClientKnownRequestError && res.error.code === "P2003") {
+        return c.json({ message: "profile id does not exist" }, 400);
+      }
+      return c.json({ message: "internal server error" }, 500);
+    }
+
+    return c.json(PostResponseSchema.parse({ post: res.value }), 200);
   }
 
   async update(c: Context) {
-    const body = await c.req.json();
+    const validationBody = UpdatePostBodySchema.parse(await c.req.json());
 
-    const id = c.req.param("id");
+    const validationParam = PostParamsSchema.parse(c.req.param());
 
     const prisma = new PrismaClient();
     const res = await fromPromise(
       prisma.post.update({
-        where: { id },
-        data: body,
+        where: { id: validationParam.id },
+        data: validationBody,
       }),
       (e) => e,
     );
@@ -88,16 +108,16 @@ export class PostHandler {
       return c.json({ message: "internal server error" }, 500);
     }
 
-    return c.json({ post: res.value }, 200);
+    return c.json(PostResponseSchema.parse({ post: res.value }), 200);
   }
 
   async delete(c: Context) {
-    const id = c.req.param("id");
+    const validationParam = PostParamsSchema.parse(c.req.param());
 
     const prisma = new PrismaClient();
     const res = await fromPromise(
       prisma.post.delete({
-        where: { id },
+        where: { id: validationParam.id },
       }),
       (e) => e,
     );
@@ -113,12 +133,12 @@ export class PostHandler {
   }
 
   async deleteMany(c: Context) {
-    const body = await c.req.json();
+    const validationBody = DeleteManyPostBodySchema.parse(await c.req.json());
 
     const prisma = new PrismaClient();
     await prisma.post.deleteMany({
       where: {
-        id: { in: body },
+        id: { in: validationBody.ids },
       },
     });
 
