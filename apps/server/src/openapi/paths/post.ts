@@ -64,6 +64,14 @@ export const getPostRoute = createRoute({
       },
       description: "エラーを返す",
     },
+    404: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "404エラーを返す",
+    },
   },
 });
 

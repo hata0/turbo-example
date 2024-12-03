@@ -22,15 +22,15 @@ export const PostSchema = z
       example:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc condimentum feugiat nunc, id elementum nulla venenatis ut. Praesent non nunc ultrices, consequat arcu sit amet, auctor lacus. Maecenas libero sem, tincidunt ut sapien quis, elementum vehicula augue. Cras non cursus nulla. Suspendisse congue posuere accumsan. Vivamus ut sollicitudin ligula. In viverra tellus vel porttitor feugiat. Ut bibendum turpis sed mauris egestas ultricies.",
     }),
-    createdAt: z.date().openapi({ example: "2024-01-01T03:00:00.000Z" }),
-    updatedAt: z.date().openapi({ example: "2024-01-01T03:00:00.000Z" }),
+    createdAt: z.string().datetime().openapi({ example: "2024-01-01T03:00:00.000Z" }),
+    updatedAt: z.string().datetime().openapi({ example: "2024-01-01T03:00:00.000Z" }),
   })
   .openapi("Post");
 export type Post = z.infer<typeof PostSchema>;
 
 export const PostResponseSchema = z
   .object({
-    post: PostSchema.nullable(),
+    post: PostSchema,
   })
   .openapi("PostResponse");
 export type PostResponse = z.infer<typeof PostResponseSchema>;

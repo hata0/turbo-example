@@ -2,9 +2,11 @@ import {
   CreatePostBodySchema,
   DeleteManyPostBodySchema,
   PostParamsSchema,
+  type PostResponse,
   PostResponseSchema,
   PostSchema,
   PostsQuerySchema,
+  type PostsResponse,
   UpdatePostBodySchema,
 } from "@/openapi/schemas/post";
 import { Prisma, PrismaClient } from "@prisma/client";
@@ -20,27 +22,35 @@ export class PostHandler {
     const prisma = new PrismaClient();
 
     // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
-    let posts;
+    let data;
     if (sort === "oldest") {
-      posts = await prisma.post.findMany({
+      data = await prisma.post.findMany({
         skip: limit * (page - 1),
         take: limit,
         orderBy: { createdAt: "asc" },
       });
     } else {
-      posts = await prisma.post.findMany({
+      data = await prisma.post.findMany({
         skip: limit * (page - 1),
         take: limit,
         orderBy: { createdAt: "desc" },
       });
     }
 
+    const result: PostsResponse["posts"] = data.map((value) => ({
+      id: value.id,
+      title: value.title,
+      body: value.body,
+      createdAt: value.createdAt.toISOString(),
+      updatedAt: value.updatedAt.toISOString(),
+    }));
+
     const totalCount = await prisma.post.count();
     const totalPage = Math.ceil(totalCount / limit);
 
     return c.json(
       {
-        posts: posts.map((post) => PostSchema.parse(post)),
+        posts: result.map((post) => PostSchema.parse(post)),
         pagination: {
           currentPage: page,
           totalPage,
@@ -57,34 +67,63 @@ export class PostHandler {
     const { id } = validationParam;
 
     const prisma = new PrismaClient();
-    const post = await prisma.post.findUnique({
+    const data = await prisma.post.findUnique({
       where: {
         id,
       },
     });
 
-    return c.json(PostResponseSchema.parse({ post }), 200);
+    if (!data) {
+      return c.json({ message: "not found" }, 404);
+    }
+
+    const result: PostResponse = {
+      post: {
+        id: data.id,
+        title: data.title,
+        body: data.body,
+        createdAt: data.createdAt.toISOString(),
+        updatedAt: data.updatedAt.toISOString(),
+      },
+    };
+
+    return c.json(PostResponseSchema.parse(result), 200);
   }
 
   async create(c: Context) {
     const validationBody = CreatePostBodySchema.parse(await c.req.json());
 
     const prisma = new PrismaClient();
-    const res = await fromPromise(
+    const data = await fromPromise(
       prisma.post.create({
         data: validationBody,
       }),
       (e) => e,
     );
 
-    if (res.isErr()) {
-      if (res.error instanceof Prisma.PrismaClientKnownRequestError && res.error.code === "P2003") {
+    if (data.isErr()) {
+      if (
+        data.error instanceof Prisma.PrismaClientKnownRequestError &&
+        data.error.code === "P2003"
+      ) {
         return c.json({ message: "profile id does not exist" }, 400);
       }
       return c.json({ message: "internal server error" }, 500);
     }
 
-    return c.json(PostResponseSchema.parse({ post: res.value }), 200);
+    const value = data.value;
+
+    const result: PostResponse = {
+      post: {
+        id: value.id,
+        title: value.title,
+        body: value.body,
+        createdAt: value.createdAt.toISOString(),
+        updatedAt: value.updatedAt.toISOString(),
+      },
+    };
+
+    return c.json(PostResponseSchema.parse(result), 200);
   }
 
   async update(c: Context) {
@@ -93,7 +132,7 @@ export class PostHandler {
     const validationParam = PostParamsSchema.parse(c.req.param());
 
     const prisma = new PrismaClient();
-    const res = await fromPromise(
+    const data = await fromPromise(
       prisma.post.update({
         where: { id: validationParam.id },
         data: validationBody,
@@ -101,14 +140,29 @@ export class PostHandler {
       (e) => e,
     );
 
-    if (res.isErr()) {
-      if (res.error instanceof Prisma.PrismaClientKnownRequestError && res.error.code === "P2025") {
+    if (data.isErr()) {
+      if (
+        data.error instanceof Prisma.PrismaClientKnownRequestError &&
+        data.error.code === "P2025"
+      ) {
         return c.json({ message: "record to update not found" }, 400);
       }
       return c.json({ message: "internal server error" }, 500);
     }
 
-    return c.json(PostResponseSchema.parse({ post: res.value }), 200);
+    const value = data.value;
+
+    const result: PostResponse = {
+      post: {
+        id: value.id,
+        title: value.title,
+        body: value.body,
+        createdAt: value.createdAt.toISOString(),
+        updatedAt: value.updatedAt.toISOString(),
+      },
+    };
+
+    return c.json(PostResponseSchema.parse(result), 200);
   }
 
   async delete(c: Context) {
