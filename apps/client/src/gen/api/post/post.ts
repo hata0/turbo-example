@@ -6,7 +6,8 @@
  */
 import {
   useMutation,
-  useQuery
+  useQuery,
+  useSuspenseQuery
 } from '@tanstack/react-query'
 import type {
   DataTag,
@@ -19,7 +20,9 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
+  UseQueryResult,
+  UseSuspenseQueryOptions,
+  UseSuspenseQueryResult
 } from '@tanstack/react-query'
 import type {
   CreatePostBody,
@@ -129,6 +132,60 @@ export function useGetPosts<TData = Awaited<ReturnType<typeof getPosts>>, TError
   const queryOptions = getGetPostsQueryOptions(params,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+export const getGetPostsSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetPostsQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPosts>>> = ({ signal }) => getPosts(params, { signal, ...requestOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData> & { queryKey: DataTag<QueryKey, TData> }
+}
+
+export type GetPostsSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getPosts>>>
+export type GetPostsSuspenseQueryError = ErrorResponse
+
+
+export function useGetPostsSuspense<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
+ params: GetPostsParams, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetPostsSuspense<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
+ params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetPostsSuspense<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
+ params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+/**
+ * @summary ポスト一覧を取得
+ */
+
+export function useGetPostsSuspense<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
+ params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
+
+  const queryOptions = getGetPostsSuspenseQueryOptions(params,options)
+
+  const query = useSuspenseQuery(queryOptions) as  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -348,6 +405,60 @@ export function useGetPostsId<TData = Awaited<ReturnType<typeof getPostsId>>, TE
   const queryOptions = getGetPostsIdQueryOptions(id,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+export const getGetPostsIdSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetPostsIdQueryKey(id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPostsId>>> = ({ signal }) => getPostsId(id, { signal, ...requestOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData> }
+}
+
+export type GetPostsIdSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getPostsId>>>
+export type GetPostsIdSuspenseQueryError = ErrorResponse
+
+
+export function useGetPostsIdSuspense<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
+ id: string, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetPostsIdSuspense<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
+ id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetPostsIdSuspense<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
+ id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+/**
+ * @summary ポストを取得
+ */
+
+export function useGetPostsIdSuspense<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
+ id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
+
+  const queryOptions = getGetPostsIdSuspenseQueryOptions(id,options)
+
+  const query = useSuspenseQuery(queryOptions) as  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
 
   query.queryKey = queryOptions.queryKey ;
 

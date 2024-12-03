@@ -1,12 +1,16 @@
 "use client";
 
-import { getPostsQueryHandler } from "@/services/backend/posts/query";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import type { GetPostsParams } from "@/gen/api/model";
+import { useGetPostsSuspense } from "@/gen/api/post/post";
 
-export const Posts = () => {
+type Props = {
+  query: GetPostsParams;
+};
+
+export const Posts = ({ query }: Props) => {
   const {
     data: { posts },
-  } = useSuspenseQuery(getPostsQueryHandler());
+  } = useGetPostsSuspense(query);
 
   return (
     <div>
@@ -14,7 +18,6 @@ export const Posts = () => {
       {posts.map((post, index) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
         <div key={index}>
-          <div>{post.name}</div>
           <div>{post.title}</div>
           <div>{post.body}</div>
         </div>

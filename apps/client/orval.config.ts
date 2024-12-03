@@ -16,6 +16,10 @@ export default defineConfig({
       clean: true,
       mock: true,
       override: {
+        query: {
+          useSuspenseQuery: true,
+          version: 5,
+        },
         mutator: {
           path: "src/utils/fetcher.ts",
           name: "fetcher",
