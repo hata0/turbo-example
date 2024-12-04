@@ -1,8 +1,6 @@
-import { getPostsHandler } from "@/services/backend/posts/mock";
+import { getGetPostsMockHandler } from "@/gen/api/post/post.msw";
 import type { Meta } from "@/tests/storybook/types/Meta";
 import type { StoryObj } from "@/tests/storybook/types/StoryObj";
-import type { PostsResponse } from "@packages/openapi";
-import { HttpResponse } from "msw";
 import { Posts } from ".";
 
 type T = typeof Posts;
@@ -14,12 +12,13 @@ export const Empty: Story = {
   parameters: {
     msw: {
       handlers: [
-        getPostsHandler({
-          resolver: () => {
-            return HttpResponse.json({
-              posts: [],
-            } satisfies PostsResponse);
+        getGetPostsMockHandler({
+          pagination: {
+            currentPage: 1,
+            totalCount: 0,
+            totalPage: 0,
           },
+          posts: [],
         }),
       ],
     },
@@ -30,7 +29,7 @@ export default {
   component: Posts,
   parameters: {
     msw: {
-      handlers: [getPostsHandler()],
+      handlers: [getGetPostsMockHandler()],
     },
   },
   title: "Features/posts/Posts",

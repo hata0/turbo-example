@@ -13,22 +13,56 @@ import {
   http
 } from 'msw'
 import type {
+  ErrorResponse,
   PostResponse,
   PostsResponse,
   SuccessResponse
 } from '.././model'
 
-export const getGetPostsResponseMock = (overrideResponse: Partial< PostsResponse > = {}): PostsResponse => ({pagination: {currentPage: faker.number.int({min: undefined, max: undefined}), totalCount: faker.number.int({min: undefined, max: undefined}), totalPage: faker.number.int({min: undefined, max: undefined})}, posts: Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({body: faker.string.alpha(20), createdAt: faker.string.alpha(20), id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: faker.string.alpha(20)})), ...overrideResponse})
+export const getGetPostsResponseMock = (overrideResponse: Partial< PostsResponse > = {}): PostsResponse => ({pagination: {currentPage: faker.number.int({min: undefined, max: undefined}), totalCount: faker.number.int({min: undefined, max: undefined}), totalPage: faker.number.int({min: undefined, max: undefined})}, posts: Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({body: faker.string.alpha(20), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`})), ...overrideResponse})
 
-export const getPostPostsResponseMock = (overrideResponse: Partial< PostResponse > = {}): PostResponse => ({post: {body: faker.string.alpha(20), createdAt: faker.string.alpha(20), id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: faker.string.alpha(20),...{}}, ...overrideResponse})
+
+export const getGetPostsResponseMock200 = (overrideResponse: Partial< PostsResponse > = {}): PostsResponse => ({pagination: {currentPage: faker.number.int({min: undefined, max: undefined}), totalCount: faker.number.int({min: undefined, max: undefined}), totalPage: faker.number.int({min: undefined, max: undefined})}, posts: Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({body: faker.string.alpha(20), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`})), ...overrideResponse})
+
+
+export const getGetPostsResponseMock400 = (overrideResponse: Partial< ErrorResponse > = {}): ErrorResponse => ({message: faker.string.alpha(20), ...overrideResponse})
+
+export const getPostPostsResponseMock = (overrideResponse: Partial< PostResponse > = {}): PostResponse => ({post: {body: faker.string.alpha(20), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`}, ...overrideResponse})
+
+
+export const getPostPostsResponseMock200 = (overrideResponse: Partial< PostResponse > = {}): PostResponse => ({post: {body: faker.string.alpha(20), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`}, ...overrideResponse})
+
+
+export const getPostPostsResponseMock400 = (overrideResponse: Partial< ErrorResponse > = {}): ErrorResponse => ({message: faker.string.alpha(20), ...overrideResponse})
 
 export const getDeletePostsResponseMock = (overrideResponse: Partial< SuccessResponse > = {}): SuccessResponse => ({message: faker.string.alpha(20), ...overrideResponse})
 
-export const getGetPostsIdResponseMock = (overrideResponse: Partial< PostResponse > = {}): PostResponse => ({post: {body: faker.string.alpha(20), createdAt: faker.string.alpha(20), id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: faker.string.alpha(20),...{}}, ...overrideResponse})
 
-export const getPutPostsIdResponseMock = (overrideResponse: Partial< PostResponse > = {}): PostResponse => ({post: {body: faker.string.alpha(20), createdAt: faker.string.alpha(20), id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: faker.string.alpha(20),...{}}, ...overrideResponse})
+export const getDeletePostsResponseMock200 = (overrideResponse: Partial< SuccessResponse > = {}): SuccessResponse => ({message: faker.string.alpha(20), ...overrideResponse})
+
+export const getGetPostsIdResponseMock = (overrideResponse: Partial< PostResponse > = {}): PostResponse => ({post: {body: faker.string.alpha(20), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`}, ...overrideResponse})
+
+
+export const getGetPostsIdResponseMock200 = (overrideResponse: Partial< PostResponse > = {}): PostResponse => ({post: {body: faker.string.alpha(20), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`}, ...overrideResponse})
+
+
+export const getGetPostsIdResponseMock400 = (overrideResponse: Partial< ErrorResponse > = {}): ErrorResponse => ({message: faker.string.alpha(20), ...overrideResponse})
+
+export const getPutPostsIdResponseMock = (overrideResponse: Partial< PostResponse > = {}): PostResponse => ({post: {body: faker.string.alpha(20), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`}, ...overrideResponse})
+
+
+export const getPutPostsIdResponseMock200 = (overrideResponse: Partial< PostResponse > = {}): PostResponse => ({post: {body: faker.string.alpha(20), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.string.alpha(20), title: faker.string.alpha(20), updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`}, ...overrideResponse})
+
+
+export const getPutPostsIdResponseMock400 = (overrideResponse: Partial< ErrorResponse > = {}): ErrorResponse => ({message: faker.string.alpha(20), ...overrideResponse})
 
 export const getDeletePostsIdResponseMock = (overrideResponse: Partial< SuccessResponse > = {}): SuccessResponse => ({message: faker.string.alpha(20), ...overrideResponse})
+
+
+export const getDeletePostsIdResponseMock200 = (overrideResponse: Partial< SuccessResponse > = {}): SuccessResponse => ({message: faker.string.alpha(20), ...overrideResponse})
+
+
+export const getDeletePostsIdResponseMock400 = (overrideResponse: Partial< ErrorResponse > = {}): ErrorResponse => ({message: faker.string.alpha(20), ...overrideResponse})
 
 
 export const getGetPostsMockHandler = (overrideResponse?: PostsResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostsResponse> | PostsResponse)) => {
@@ -38,6 +72,32 @@ export const getGetPostsMockHandler = (overrideResponse?: PostsResponse | ((info
             ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
             : getGetPostsResponseMock()),
       { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
+
+export const getGetPostsMockHandler200 = (overrideResponse?: PostsResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostsResponse> | PostsResponse)) => {
+  return http.get('*/posts', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getGetPostsResponseMock200()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
+
+export const getGetPostsMockHandler400 = (overrideResponse?: ErrorResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ErrorResponse> | ErrorResponse)) => {
+  return http.get('*/posts', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getGetPostsResponseMock400()),
+      { status: 400,
         headers: { 'Content-Type': 'application/json' }
       })
   })
@@ -55,12 +115,51 @@ export const getPostPostsMockHandler = (overrideResponse?: PostResponse | ((info
   })
 }
 
+
+export const getPostPostsMockHandler200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
+  return http.post('*/posts', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getPostPostsResponseMock200()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
+
+export const getPostPostsMockHandler400 = (overrideResponse?: ErrorResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ErrorResponse> | ErrorResponse)) => {
+  return http.post('*/posts', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getPostPostsResponseMock400()),
+      { status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
 export const getDeletePostsMockHandler = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
   return http.delete('*/posts', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
             ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
             : getDeletePostsResponseMock()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
+
+export const getDeletePostsMockHandler200 = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
+  return http.delete('*/posts', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getDeletePostsResponseMock200()),
       { status: 200,
         headers: { 'Content-Type': 'application/json' }
       })
@@ -79,6 +178,32 @@ export const getGetPostsIdMockHandler = (overrideResponse?: PostResponse | ((inf
   })
 }
 
+
+export const getGetPostsIdMockHandler200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
+  return http.get('*/posts/:id', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getGetPostsIdResponseMock200()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
+
+export const getGetPostsIdMockHandler400 = (overrideResponse?: ErrorResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ErrorResponse> | ErrorResponse)) => {
+  return http.get('*/posts/:id', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getGetPostsIdResponseMock400()),
+      { status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
 export const getPutPostsIdMockHandler = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
   return http.put('*/posts/:id', async (info) => {await delay(1000);
   
@@ -91,6 +216,32 @@ export const getPutPostsIdMockHandler = (overrideResponse?: PostResponse | ((inf
   })
 }
 
+
+export const getPutPostsIdMockHandler200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
+  return http.put('*/posts/:id', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getPutPostsIdResponseMock200()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
+
+export const getPutPostsIdMockHandler400 = (overrideResponse?: ErrorResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ErrorResponse> | ErrorResponse)) => {
+  return http.put('*/posts/:id', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getPutPostsIdResponseMock400()),
+      { status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
 export const getDeletePostsIdMockHandler = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
   return http.delete('*/posts/:id', async (info) => {await delay(1000);
   
@@ -98,6 +249,32 @@ export const getDeletePostsIdMockHandler = (overrideResponse?: SuccessResponse |
             ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
             : getDeletePostsIdResponseMock()),
       { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
+
+export const getDeletePostsIdMockHandler200 = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
+  return http.delete('*/posts/:id', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getDeletePostsIdResponseMock200()),
+      { status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      })
+  })
+}
+
+
+export const getDeletePostsIdMockHandler400 = (overrideResponse?: ErrorResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ErrorResponse> | ErrorResponse)) => {
+  return http.delete('*/posts/:id', async (info) => {await delay(1000);
+  
+    return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
+            ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse) 
+            : getDeletePostsIdResponseMock400()),
+      { status: 400,
         headers: { 'Content-Type': 'application/json' }
       })
   })

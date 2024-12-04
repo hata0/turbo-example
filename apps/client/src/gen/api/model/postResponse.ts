@@ -4,8 +4,8 @@
  * Tutorial API
  * OpenAPI spec version: 1.0.0
  */
-import type { PostResponsePost } from './postResponsePost';
+import type { Post } from './post';
 
 export interface PostResponse {
-  post: PostResponsePost;
+  post: Post;
 }

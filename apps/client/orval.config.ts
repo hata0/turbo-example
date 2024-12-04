@@ -14,7 +14,10 @@ export default defineConfig({
       client: "react-query",
       httpClient: "fetch",
       clean: true,
-      mock: true,
+      mock: {
+        type: "msw",
+        generateEachHttpStatus: true,
+      },
       override: {
         query: {
           useSuspenseQuery: true,

@@ -13,8 +13,6 @@ export * from './getPostsSort';
 export * from './paginationResponse';
 export * from './post';
 export * from './postResponse';
-export * from './postResponsePost';
-export * from './postResponsePostAllOf';
 export * from './postsResponse';
 export * from './successResponse';
 export * from './updatePostBody';

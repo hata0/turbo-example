@@ -22,8 +22,8 @@ export const getPostsResponse = zod.object({
   "id": zod.string(),
   "title": zod.string(),
   "body": zod.string(),
-  "createdAt": zod.string(),
-  "updatedAt": zod.string()
+  "createdAt": zod.string().datetime(),
+  "updatedAt": zod.string().datetime()
 })),
   "pagination": zod.object({
   "currentPage": zod.number(),
@@ -46,9 +46,9 @@ export const postPostsResponse = zod.object({
   "id": zod.string(),
   "title": zod.string(),
   "body": zod.string(),
-  "createdAt": zod.string(),
-  "updatedAt": zod.string()
-}).and(zod.any().nullable())
+  "createdAt": zod.string().datetime(),
+  "updatedAt": zod.string().datetime()
+})
 })
 
 /**
@@ -74,9 +74,9 @@ export const getPostsIdResponse = zod.object({
   "id": zod.string(),
   "title": zod.string(),
   "body": zod.string(),
-  "createdAt": zod.string(),
-  "updatedAt": zod.string()
-}).and(zod.any().nullable())
+  "createdAt": zod.string().datetime(),
+  "updatedAt": zod.string().datetime()
+})
 })
 
 /**
@@ -96,9 +96,9 @@ export const putPostsIdResponse = zod.object({
   "id": zod.string(),
   "title": zod.string(),
   "body": zod.string(),
-  "createdAt": zod.string(),
-  "updatedAt": zod.string()
-}).and(zod.any().nullable())
+  "createdAt": zod.string().datetime(),
+  "updatedAt": zod.string().datetime()
+})
 })
 
 /**
