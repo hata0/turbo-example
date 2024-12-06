@@ -1,6 +1,8 @@
-import { BACKEND_URL } from "@/constants/backend-url";
+// import { BACKEND_URL } from "@/constants/backend-url";
 import { fromPromise } from "neverthrow";
 import { HttpError } from "./http-error";
+
+const BACKEND_URL = "http://localhost:8787";
 
 export const fetcher = async <T>(
   input: string | URL | globalThis.Request,

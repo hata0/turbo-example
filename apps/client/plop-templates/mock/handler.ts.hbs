@@ -1,0 +1,3 @@
+export const get{{name}}MockHandler = httpHandlerFactory("{{method}}", "*{{mockpath}}", () => {
+  return HttpResponse.json(get{{name}}ResponseMock());
+});
