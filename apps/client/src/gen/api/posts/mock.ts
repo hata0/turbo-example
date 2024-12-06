@@ -1,11 +1,11 @@
 import { httpHandlerFactory } from "@/libs/msw/httpHandlerFactory";
 import { HttpResponse } from "msw";
-import { getGetPostsResponseMock } from "./post.msw";
-import { getPostPostsResponseMock } from "./post.msw";
-import { getDeletePostsResponseMock } from "./post.msw";
-import { getGetPostsIdResponseMock } from "./post.msw";
-import { getPutPostsIdResponseMock } from "./post.msw";
-import { getDeletePostsIdResponseMock } from "./post.msw";
+import { getGetPostsResponseMock } from "./posts.msw";
+import { getPostPostsResponseMock } from "./posts.msw";
+import { getDeletePostsResponseMock } from "./posts.msw";
+import { getGetPostsIdResponseMock } from "./posts.msw";
+import { getPutPostsIdResponseMock } from "./posts.msw";
+import { getDeletePostsIdResponseMock } from "./posts.msw";
 
 export const getGetPostsMockHandler = httpHandlerFactory("get", "*/posts", () => {
   return HttpResponse.json(getGetPostsResponseMock());

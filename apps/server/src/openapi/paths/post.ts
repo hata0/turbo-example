@@ -12,7 +12,7 @@ import {
 import { SuccessResponseSchema } from "../schemas/success";
 
 export const listPostRoute = createRoute({
-  tags: ["post"],
+  tags: ["posts"],
   method: "get",
   path: "/",
   summary: "ポスト一覧を取得",
@@ -40,7 +40,7 @@ export const listPostRoute = createRoute({
 });
 
 export const getPostRoute = createRoute({
-  tags: ["post"],
+  tags: ["posts"],
   method: "get",
   path: "/{id}",
   summary: "ポストを取得",
@@ -76,7 +76,7 @@ export const getPostRoute = createRoute({
 });
 
 export const createPostRoute = createRoute({
-  tags: ["post"],
+  tags: ["posts"],
   method: "post",
   path: "/",
   summary: "ポストを作成",
@@ -119,7 +119,7 @@ export const createPostRoute = createRoute({
 });
 
 export const updatePostRoute = createRoute({
-  tags: ["post"],
+  tags: ["posts"],
   method: "put",
   path: "/{id}",
   summary: "ポストの更新",
@@ -163,7 +163,7 @@ export const updatePostRoute = createRoute({
 });
 
 export const deletePostRoute = createRoute({
-  tags: ["post"],
+  tags: ["posts"],
   method: "delete",
   path: "/{id}",
   summary: "ポストを削除",
@@ -199,7 +199,7 @@ export const deletePostRoute = createRoute({
 });
 
 export const deleteManyPostRoute = createRoute({
-  tags: ["post"],
+  tags: ["posts"],
   method: "delete",
   path: "/",
   summary: "ポストを複数削除",

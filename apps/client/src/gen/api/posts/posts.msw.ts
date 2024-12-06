@@ -102,7 +102,7 @@ export const getDeletePostsIdMockHandler = (overrideResponse?: SuccessResponse |
       })
   })
 }
-export const getPostMock = () => [
+export const getPostsMock = () => [
   getGetPostsMockHandler(),
   getPostPostsMockHandler(),
   getDeletePostsMockHandler(),
