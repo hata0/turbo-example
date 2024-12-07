@@ -31,7 +31,7 @@ export const getPutPostsIdResponseMock = (overrideResponse: Partial< PostRespons
 export const getDeletePostsIdResponseMock = (overrideResponse: Partial< SuccessResponse > = {}): SuccessResponse => ({message: faker.string.alpha(20), ...overrideResponse})
 
 
-export const getGetPostsMockHandler = (overrideResponse?: PostsResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostsResponse> | PostsResponse)) => {
+export const getGetPostsMockHandler200 = (overrideResponse?: PostsResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostsResponse> | PostsResponse)) => {
   return http.get('*/posts', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -43,7 +43,7 @@ export const getGetPostsMockHandler = (overrideResponse?: PostsResponse | ((info
   })
 }
 
-export const getPostPostsMockHandler = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
+export const getPostPostsMockHandler200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
   return http.post('*/posts', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -55,7 +55,7 @@ export const getPostPostsMockHandler = (overrideResponse?: PostResponse | ((info
   })
 }
 
-export const getDeletePostsMockHandler = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
+export const getDeletePostsMockHandler200 = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
   return http.delete('*/posts', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -67,7 +67,7 @@ export const getDeletePostsMockHandler = (overrideResponse?: SuccessResponse | (
   })
 }
 
-export const getGetPostsIdMockHandler = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
+export const getGetPostsIdMockHandler200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
   return http.get('*/posts/:id', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -79,7 +79,7 @@ export const getGetPostsIdMockHandler = (overrideResponse?: PostResponse | ((inf
   })
 }
 
-export const getPutPostsIdMockHandler = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
+export const getPutPostsIdMockHandler200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
   return http.put('*/posts/:id', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -91,7 +91,7 @@ export const getPutPostsIdMockHandler = (overrideResponse?: PostResponse | ((inf
   })
 }
 
-export const getDeletePostsIdMockHandler = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
+export const getDeletePostsIdMockHandler200 = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
   return http.delete('*/posts/:id', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -103,10 +103,10 @@ export const getDeletePostsIdMockHandler = (overrideResponse?: SuccessResponse |
   })
 }
 export const getPostsMock = () => [
-  getGetPostsMockHandler(),
-  getPostPostsMockHandler(),
-  getDeletePostsMockHandler(),
-  getGetPostsIdMockHandler(),
-  getPutPostsIdMockHandler(),
-  getDeletePostsIdMockHandler()
+  getGetPostsMockHandler200(),
+  getPostPostsMockHandler200(),
+  getDeletePostsMockHandler200(),
+  getGetPostsIdMockHandler200(),
+  getPutPostsIdMockHandler200(),
+  getDeletePostsIdMockHandler200()
 ]

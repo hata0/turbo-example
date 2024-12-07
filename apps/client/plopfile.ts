@@ -99,6 +99,13 @@ export default async function (plop: NodePlopAPI) {
             tagName: data.tagName,
           },
         },
+        {
+          type: "modify",
+          path: `src/gen/api${data.tag}/${data.tagName}.msw.ts`,
+          pattern: new RegExp(`(get${data.handlerData.name}MockHandler)`, "g"),
+          template: "get{{name}}MockHandler200",
+          data: { name: data.handlerData.name },
+        },
       ]),
       ...tagList.map(
         (tag): ActionType => ({
