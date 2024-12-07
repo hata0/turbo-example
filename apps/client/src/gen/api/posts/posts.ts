@@ -34,10 +34,8 @@ import type {
   SuccessResponse,
   UpdatePostBody
 } from '.././model'
-import { fetcher } from '../../../utils/fetcher';
+import { fetcher } from '../../../libs/openapi/fetcher';
 
-
-type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1];
 
 
 /**
@@ -74,16 +72,16 @@ export const getGetPostsQueryKey = (params: GetPostsParams,) => {
     }
 
     
-export const getGetPostsQueryOptions = <TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(params: GetPostsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+export const getGetPostsQueryOptions = <TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(params: GetPostsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, }
 ) => {
 
-const {query: queryOptions, request: requestOptions} = options ?? {};
+const {query: queryOptions} = options ?? {};
 
   const queryKey =  queryOptions?.queryKey ?? getGetPostsQueryKey(params);
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPosts>>> = ({ signal }) => getPosts(params, { signal, ...requestOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPosts>>> = ({ signal }) => getPosts(params, signal);
 
       
 
@@ -103,7 +101,7 @@ export function useGetPosts<TData = Awaited<ReturnType<typeof getPosts>>, TError
           TError,
           TData
         > , 'initialData'
-      >, request?: SecondParameter<typeof fetcher>}
+      >, }
 
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 export function useGetPosts<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
@@ -113,11 +111,11 @@ export function useGetPosts<TData = Awaited<ReturnType<typeof getPosts>>, TError
           TError,
           TData
         > , 'initialData'
-      >, request?: SecondParameter<typeof fetcher>}
+      >, }
 
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 export function useGetPosts<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
- params: GetPostsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ params: GetPostsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, }
 
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 /**
@@ -125,7 +123,7 @@ export function useGetPosts<TData = Awaited<ReturnType<typeof getPosts>>, TError
  */
 
 export function useGetPosts<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
- params: GetPostsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ params: GetPostsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, }
 
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
 
@@ -140,16 +138,16 @@ export function useGetPosts<TData = Awaited<ReturnType<typeof getPosts>>, TError
 
 
 
-export const getGetPostsSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+export const getGetPostsSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, }
 ) => {
 
-const {query: queryOptions, request: requestOptions} = options ?? {};
+const {query: queryOptions} = options ?? {};
 
   const queryKey =  queryOptions?.queryKey ?? getGetPostsQueryKey(params);
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPosts>>> = ({ signal }) => getPosts(params, { signal, ...requestOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPosts>>> = ({ signal }) => getPosts(params, signal);
 
       
 
@@ -163,15 +161,15 @@ export type GetPostsSuspenseQueryError = ErrorResponse
 
 
 export function useGetPostsSuspense<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
- params: GetPostsParams, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ params: GetPostsParams, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, }
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 export function useGetPostsSuspense<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
- params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, }
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 export function useGetPostsSuspense<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
- params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, }
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 /**
@@ -179,7 +177,7 @@ export function useGetPostsSuspense<TData = Awaited<ReturnType<typeof getPosts>>
  */
 
 export function useGetPostsSuspense<TData = Awaited<ReturnType<typeof getPosts>>, TError = ErrorResponse>(
- params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ params: GetPostsParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPosts>>, TError, TData>>, }
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
 
@@ -219,9 +217,9 @@ export const postPosts = async (createPostBody: CreatePostBody, options?: Reques
 
 
 export const getPostPostsMutationOptions = <TError = ErrorResponse,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPosts>>, TError,{data: CreatePostBody}, TContext>, request?: SecondParameter<typeof fetcher>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPosts>>, TError,{data: CreatePostBody}, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof postPosts>>, TError,{data: CreatePostBody}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+const {mutation: mutationOptions} = options ?? {};
 
       
 
@@ -229,7 +227,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof postPosts>>, {data: CreatePostBody}> = (props) => {
           const {data} = props ?? {};
 
-          return  postPosts(data,requestOptions)
+          return  postPosts(data,)
         }
 
         
@@ -245,7 +243,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
  * @summary ポストを作成
  */
 export const usePostPosts = <TError = ErrorResponse,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPosts>>, TError,{data: CreatePostBody}, TContext>, request?: SecondParameter<typeof fetcher>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPosts>>, TError,{data: CreatePostBody}, TContext>, }
 ): UseMutationResult<
         Awaited<ReturnType<typeof postPosts>>,
         TError,
@@ -282,9 +280,9 @@ export const deletePosts = async (deleteManyPostBody: DeleteManyPostBody, option
 
 
 export const getDeletePostsMutationOptions = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deletePosts>>, TError,{data: DeleteManyPostBody}, TContext>, request?: SecondParameter<typeof fetcher>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deletePosts>>, TError,{data: DeleteManyPostBody}, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof deletePosts>>, TError,{data: DeleteManyPostBody}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+const {mutation: mutationOptions} = options ?? {};
 
       
 
@@ -292,7 +290,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof deletePosts>>, {data: DeleteManyPostBody}> = (props) => {
           const {data} = props ?? {};
 
-          return  deletePosts(data,requestOptions)
+          return  deletePosts(data,)
         }
 
         
@@ -308,7 +306,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
  * @summary ポストを複数削除
  */
 export const useDeletePosts = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deletePosts>>, TError,{data: DeleteManyPostBody}, TContext>, request?: SecondParameter<typeof fetcher>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deletePosts>>, TError,{data: DeleteManyPostBody}, TContext>, }
 ): UseMutationResult<
         Awaited<ReturnType<typeof deletePosts>>,
         TError,
@@ -347,16 +345,16 @@ export const getGetPostsIdQueryKey = (id: string,) => {
     }
 
     
-export const getGetPostsIdQueryOptions = <TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+export const getGetPostsIdQueryOptions = <TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, }
 ) => {
 
-const {query: queryOptions, request: requestOptions} = options ?? {};
+const {query: queryOptions} = options ?? {};
 
   const queryKey =  queryOptions?.queryKey ?? getGetPostsIdQueryKey(id);
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPostsId>>> = ({ signal }) => getPostsId(id, { signal, ...requestOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPostsId>>> = ({ signal }) => getPostsId(id, signal);
 
       
 
@@ -376,7 +374,7 @@ export function useGetPostsId<TData = Awaited<ReturnType<typeof getPostsId>>, TE
           TError,
           TData
         > , 'initialData'
-      >, request?: SecondParameter<typeof fetcher>}
+      >, }
 
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 export function useGetPostsId<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
@@ -386,11 +384,11 @@ export function useGetPostsId<TData = Awaited<ReturnType<typeof getPostsId>>, TE
           TError,
           TData
         > , 'initialData'
-      >, request?: SecondParameter<typeof fetcher>}
+      >, }
 
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 export function useGetPostsId<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, }
 
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 /**
@@ -398,7 +396,7 @@ export function useGetPostsId<TData = Awaited<ReturnType<typeof getPostsId>>, TE
  */
 
 export function useGetPostsId<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, }
 
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
 
@@ -413,16 +411,16 @@ export function useGetPostsId<TData = Awaited<ReturnType<typeof getPostsId>>, TE
 
 
 
-export const getGetPostsIdSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+export const getGetPostsIdSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, }
 ) => {
 
-const {query: queryOptions, request: requestOptions} = options ?? {};
+const {query: queryOptions} = options ?? {};
 
   const queryKey =  queryOptions?.queryKey ?? getGetPostsIdQueryKey(id);
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPostsId>>> = ({ signal }) => getPostsId(id, { signal, ...requestOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPostsId>>> = ({ signal }) => getPostsId(id, signal);
 
       
 
@@ -436,15 +434,15 @@ export type GetPostsIdSuspenseQueryError = ErrorResponse
 
 
 export function useGetPostsIdSuspense<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
- id: string, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ id: string, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, }
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 export function useGetPostsIdSuspense<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
- id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, }
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 export function useGetPostsIdSuspense<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
- id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, }
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
 /**
@@ -452,7 +450,7 @@ export function useGetPostsIdSuspense<TData = Awaited<ReturnType<typeof getPosts
  */
 
 export function useGetPostsIdSuspense<TData = Awaited<ReturnType<typeof getPostsId>>, TError = ErrorResponse>(
- id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, request?: SecondParameter<typeof fetcher>}
+ id: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getPostsId>>, TError, TData>>, }
 
   ):  UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
 
@@ -493,9 +491,9 @@ export const putPostsId = async (id: string,
 
 
 export const getPutPostsIdMutationOptions = <TError = ErrorResponse,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putPostsId>>, TError,{id: string;data: UpdatePostBody}, TContext>, request?: SecondParameter<typeof fetcher>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putPostsId>>, TError,{id: string;data: UpdatePostBody}, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof putPostsId>>, TError,{id: string;data: UpdatePostBody}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+const {mutation: mutationOptions} = options ?? {};
 
       
 
@@ -503,7 +501,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof putPostsId>>, {id: string;data: UpdatePostBody}> = (props) => {
           const {id,data} = props ?? {};
 
-          return  putPostsId(id,data,requestOptions)
+          return  putPostsId(id,data,)
         }
 
         
@@ -519,7 +517,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
  * @summary ポストの更新
  */
 export const usePutPostsId = <TError = ErrorResponse,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putPostsId>>, TError,{id: string;data: UpdatePostBody}, TContext>, request?: SecondParameter<typeof fetcher>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putPostsId>>, TError,{id: string;data: UpdatePostBody}, TContext>, }
 ): UseMutationResult<
         Awaited<ReturnType<typeof putPostsId>>,
         TError,
@@ -555,9 +553,9 @@ export const deletePostsId = async (id: string, options?: RequestInit): Promise<
 
 
 export const getDeletePostsIdMutationOptions = <TError = ErrorResponse,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deletePostsId>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof fetcher>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deletePostsId>>, TError,{id: string}, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof deletePostsId>>, TError,{id: string}, TContext> => {
-const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+const {mutation: mutationOptions} = options ?? {};
 
       
 
@@ -565,7 +563,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof deletePostsId>>, {id: string}> = (props) => {
           const {id} = props ?? {};
 
-          return  deletePostsId(id,requestOptions)
+          return  deletePostsId(id,)
         }
 
         
@@ -581,7 +579,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
  * @summary ポストを削除
  */
 export const useDeletePostsId = <TError = ErrorResponse,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deletePostsId>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof fetcher>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deletePostsId>>, TError,{id: string}, TContext>, }
 ): UseMutationResult<
         Awaited<ReturnType<typeof deletePostsId>>,
         TError,

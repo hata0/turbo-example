@@ -1,4 +1,4 @@
-import { fetcher } from "@/utils/fetcher";
+import { HttpClient } from "@/utils/http-client";
 import type { OpenAPIObject, OperationObject } from "openapi3-ts/oas30";
 import type { ActionType, NodePlopAPI } from "plop";
 import { z } from "zod";
@@ -26,7 +26,7 @@ const toPascalCase = (input: string): string => {
 };
 
 export default async function (plop: NodePlopAPI) {
-  const doc: OpenAPIObject = await fetcher("/doc", {
+  const doc: OpenAPIObject = await new HttpClient("http://localhost:8787").fetch("/doc", {
     method: "get",
   });
 

@@ -1,10 +1,10 @@
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 import { Posts } from "@/features/posts/components/Posts";
-import { getGetPostsSuspenseQueryOptions } from "@/gen/api/post/post";
 import { getQueryClient } from "@/libs/tanstack-query/getQueryClient";
 import type { SearchParams } from "nuqs";
 
+import { getGetPostsSuspenseQueryOptions } from "@/gen/api/posts/posts";
 import { createSearchParamsCache, parseAsInteger, parseAsStringLiteral } from "nuqs/server";
 
 const sort = ["latest", "oldest"] as const;

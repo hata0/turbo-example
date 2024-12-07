@@ -1,7 +1,7 @@
 "use client";
 
 import type { GetPostsParams } from "@/gen/api/model";
-import { useGetPostsSuspense } from "@/gen/api/post/post";
+import { useGetPostsSuspense } from "@/gen/api/posts/posts";
 
 type Props = {
   query: GetPostsParams;

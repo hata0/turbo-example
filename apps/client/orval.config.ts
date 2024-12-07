@@ -21,7 +21,7 @@ export default defineConfig({
           version: 5,
         },
         mutator: {
-          path: "src/utils/fetcher.ts",
+          path: "src/libs/openapi/fetcher.ts",
           name: "fetcher",
         },
         fetch: {
