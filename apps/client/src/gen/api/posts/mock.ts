@@ -1,4 +1,4 @@
-import { httpHandlerFactory } from "@/libs/msw/httpHandlerFactory";
+import { httpHandlerFactory } from "@/tests/msw/httpHandlerFactory";
 import { HttpResponse } from "msw";
 import { getGetPostsResponseMock } from "./posts.msw";
 import { getPostPostsResponseMock } from "./posts.msw";
