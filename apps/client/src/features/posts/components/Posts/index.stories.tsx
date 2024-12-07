@@ -1,6 +1,7 @@
-import { getGetPostsMockHandler } from "@/gen/api/post/post.msw";
+import { getGetPostsMockHandler } from "@/gen/api/posts/mock";
 import type { Meta } from "@/tests/storybook/types/Meta";
 import type { StoryObj } from "@/tests/storybook/types/StoryObj";
+import { HttpResponse } from "msw";
 import { Posts } from ".";
 
 type T = typeof Posts;
@@ -13,12 +14,16 @@ export const Empty: Story = {
     msw: {
       handlers: [
         getGetPostsMockHandler({
-          pagination: {
-            currentPage: 1,
-            totalCount: 0,
-            totalPage: 0,
+          resolver: () => {
+            return HttpResponse.json({
+              pagination: {
+                currentPage: 1,
+                totalCount: 0,
+                totalPage: 0,
+              },
+              posts: [],
+            });
           },
-          posts: [],
         }),
       ],
     },
