@@ -8,9 +8,9 @@ import {
   faker
 } from '@faker-js/faker'
 import {
+  http,
   HttpResponse,
-  delay,
-  http
+  delay
 } from 'msw'
 import type {
   PostResponse,
@@ -31,7 +31,7 @@ export const getPutPostsIdResponseMock = (overrideResponse: Partial< PostRespons
 export const getDeletePostsIdResponseMock = (overrideResponse: Partial< SuccessResponse > = {}): SuccessResponse => ({message: faker.string.alpha(20), ...overrideResponse})
 
 
-export const getGetPostsMockHandler200200 = (overrideResponse?: PostsResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostsResponse> | PostsResponse)) => {
+export const getGetPostsMockHandler200 = (overrideResponse?: PostsResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostsResponse> | PostsResponse)) => {
   return http.get('*/posts', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -43,7 +43,7 @@ export const getGetPostsMockHandler200200 = (overrideResponse?: PostsResponse | 
   })
 }
 
-export const getPostPostsMockHandler200200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
+export const getPostPostsMockHandler200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
   return http.post('*/posts', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -55,7 +55,7 @@ export const getPostPostsMockHandler200200 = (overrideResponse?: PostResponse | 
   })
 }
 
-export const getDeletePostsMockHandler200200 = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
+export const getDeletePostsMockHandler200 = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
   return http.delete('*/posts', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -67,7 +67,7 @@ export const getDeletePostsMockHandler200200 = (overrideResponse?: SuccessRespon
   })
 }
 
-export const getGetPostsIdMockHandler200200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
+export const getGetPostsIdMockHandler200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
   return http.get('*/posts/:id', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -79,7 +79,7 @@ export const getGetPostsIdMockHandler200200 = (overrideResponse?: PostResponse |
   })
 }
 
-export const getPutPostsIdMockHandler200200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
+export const getPutPostsIdMockHandler200 = (overrideResponse?: PostResponse | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<PostResponse> | PostResponse)) => {
   return http.put('*/posts/:id', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -91,7 +91,7 @@ export const getPutPostsIdMockHandler200200 = (overrideResponse?: PostResponse |
   })
 }
 
-export const getDeletePostsIdMockHandler200200 = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
+export const getDeletePostsIdMockHandler200 = (overrideResponse?: SuccessResponse | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<SuccessResponse> | SuccessResponse)) => {
   return http.delete('*/posts/:id', async (info) => {await delay(1000);
   
     return new HttpResponse(JSON.stringify(overrideResponse !== undefined 
@@ -103,10 +103,10 @@ export const getDeletePostsIdMockHandler200200 = (overrideResponse?: SuccessResp
   })
 }
 export const getPostsMock = () => [
-  getGetPostsMockHandler200200(),
-  getPostPostsMockHandler200200(),
-  getDeletePostsMockHandler200200(),
-  getGetPostsIdMockHandler200200(),
-  getPutPostsIdMockHandler200200(),
-  getDeletePostsIdMockHandler200200()
+  getGetPostsMockHandler200(),
+  getPostPostsMockHandler200(),
+  getDeletePostsMockHandler200(),
+  getGetPostsIdMockHandler200(),
+  getPutPostsIdMockHandler200(),
+  getDeletePostsIdMockHandler200()
 ]

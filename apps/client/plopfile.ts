@@ -3,6 +3,9 @@ import type { OpenAPIObject, OperationObject } from "openapi3-ts/oas30";
 import type { ActionType, NodePlopAPI } from "plop";
 import { z } from "zod";
 
+const BASE_URL = "http://localhost:8787";
+const OUTPUT = "src/gen";
+
 const MethodSchema = z.enum(["get", "put", "post", "delete", "options", "head", "patch", "trace"]);
 type Method = z.infer<typeof MethodSchema>;
 
@@ -26,7 +29,7 @@ const toPascalCase = (input: string): string => {
 };
 
 export default async function (plop: NodePlopAPI) {
-  const doc: OpenAPIObject = await new HttpClient("http://localhost:8787").fetch("/doc", {
+  const doc: OpenAPIObject = await new HttpClient(BASE_URL).fetch("/doc", {
     method: "get",
   });
 
@@ -77,7 +80,7 @@ export default async function (plop: NodePlopAPI) {
       ...tagList.map(
         (tag): ActionType => ({
           type: "add",
-          path: `src/gen/api${tag}/mock.ts`,
+          path: `${OUTPUT}/api${tag}/mock.ts`,
           templateFile: "plop-templates/mock/mock.ts.hbs",
           force: true,
         }),
@@ -85,13 +88,13 @@ export default async function (plop: NodePlopAPI) {
       ...data.flatMap((data): ActionType[] => [
         {
           type: "append",
-          path: `src/gen/api${data.tag}/mock.ts`,
+          path: `${OUTPUT}/api${data.tag}/mock.ts`,
           templateFile: "plop-templates/mock/handler.ts.hbs",
           data: data.handlerData satisfies HandlerData,
         },
         {
           type: "modify",
-          path: `src/gen/api${data.tag}/mock.ts`,
+          path: `${OUTPUT}/api${data.tag}/mock.ts`,
           pattern: /(\/\/ IMPORTS)/g,
           template: 'import { get{{name}}ResponseMock } from "./{{tagName}}.msw";\n$1',
           data: {
@@ -101,7 +104,7 @@ export default async function (plop: NodePlopAPI) {
         },
         {
           type: "modify",
-          path: `src/gen/api${data.tag}/${data.tagName}.msw.ts`,
+          path: `${OUTPUT}/api${data.tag}/${data.tagName}.msw.ts`,
           pattern: new RegExp(`(get${data.handlerData.name}MockHandler)`, "g"),
           template: "get{{name}}MockHandler200",
           data: { name: data.handlerData.name },
@@ -110,7 +113,7 @@ export default async function (plop: NodePlopAPI) {
       ...tagList.map(
         (tag): ActionType => ({
           type: "modify",
-          path: `src/gen/api${tag}/mock.ts`,
+          path: `${OUTPUT}/api${tag}/mock.ts`,
           pattern: /(\/\/ IMPORTS)/g,
         }),
       ),

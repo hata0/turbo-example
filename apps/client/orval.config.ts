@@ -1,16 +1,17 @@
 import { defineConfig } from "orval";
 
-const openapiDocs = "http://localhost:8787/doc";
+const INPUT = "http://localhost:8787/doc";
+const OUTPUT = "src/gen/api";
 
 export default defineConfig({
   api: {
     input: {
-      target: openapiDocs,
+      target: INPUT,
     },
     output: {
       mode: "tags-split",
-      target: "src/gen/api",
-      schemas: "src/gen/api/model",
+      target: OUTPUT,
+      schemas: `${OUTPUT}/model`,
       client: "react-query",
       httpClient: "fetch",
       clean: true,
@@ -32,11 +33,11 @@ export default defineConfig({
   },
   zod: {
     input: {
-      target: openapiDocs,
+      target: INPUT,
     },
     output: {
       mode: "tags-split",
-      target: "src/gen/api",
+      target: OUTPUT,
       client: "zod",
       fileExtension: ".zod.ts",
     },
