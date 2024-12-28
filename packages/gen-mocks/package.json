@@ -1,0 +1,29 @@
+{
+  "name": "@packages/gen-mocks",
+  "version": "0.0.1",
+  "description": "plop generator to generate mocks from openapi",
+  "files": ["dist"],
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "start": "tsc --watch",
+    "build": "rm -rf dist && tsc",
+    "postbuild": "cp -r src/templates dist/templates",
+    "lint": "biome check . && tsc --incremental false --noEmit",
+    "fix": "biome check --fix --unsafe .",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "2.1.8",
+    "node-plop": "^0.32.0",
+    "openapi3-ts": "^4.4.0",
+    "plop": "^4.0.1",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "neverthrow": "^8.1.1",
+    "zod": "^3.23.8"
+  }
+}

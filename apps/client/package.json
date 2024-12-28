@@ -31,6 +31,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^1.8.0",
     "@faker-js/faker": "^9.2.0",
+    "@packages/gen-mocks": "workspace:^",
     "@storybook/addon-a11y": "^8.2.9",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
@@ -48,7 +49,6 @@
     "graphql": "^16.9.0",
     "msw": "^2.4.1",
     "msw-storybook-addon": "^2.0.3",
-    "openapi3-ts": "^4.4.0",
     "orval": "^7.3.0",
     "plop": "^4.0.1",
     "postcss": "^8",
