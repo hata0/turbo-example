@@ -13,7 +13,7 @@ export const PostSortPattern = {
 
 export type PostSortPatternType = (typeof PostSortPattern)[keyof typeof PostSortPattern];
 
-export class ListPostQueryServiceInput extends BasePaginationQueryServiceInput {
+export class ListPostHttpQueryServiceInput extends BasePaginationQueryServiceInput {
   constructor(
     public readonly limit: number,
     public readonly page: number,
@@ -32,19 +32,18 @@ export class ListPostQueryServiceInput extends BasePaginationQueryServiceInput {
   }
 }
 
-export class ListPostPaginationQueryServiceDto extends BasePaginationQueryServiceDto {}
+export class ListPostPaginationHttpQueryServiceDto extends BasePaginationQueryServiceDto {}
 
-export class ListPostQueryServiceDto implements PostsResponse {
+export class ListPostHttpQueryServiceDto implements PostsResponse {
   private constructor(
     public readonly posts: PostsResponse["posts"],
-    public readonly pagination: ListPostPaginationQueryServiceDto,
+    public readonly pagination: ListPostPaginationHttpQueryServiceDto,
   ) {}
 
   static create(
     posts: Post[],
-    input: ListPostQueryServiceInput,
-    totalCount: number,
-  ): Result<ListPostQueryServiceDto, AppError<Status<"InternalServerError">>> {
+    pagination: ListPostPaginationHttpQueryServiceDto,
+  ): Result<ListPostHttpQueryServiceDto, AppError<Status<"InternalServerError">>> {
     const postsOrError = fromThrowable(
       () =>
         posts.map((p) => {
@@ -68,18 +67,13 @@ export class ListPostQueryServiceDto implements PostsResponse {
     if (postsOrError.isErr()) {
       return err(postsOrError.error);
     }
-    return ok(
-      new ListPostQueryServiceDto(
-        postsOrError.value,
-        new ListPostPaginationQueryServiceDto(input, totalCount),
-      ),
-    );
+    return ok(new ListPostHttpQueryServiceDto(postsOrError.value, pagination));
   }
 }
 
 export type IListPostHttpQueryService = {
   exec: (
-    input: ListPostQueryServiceInput,
+    input: ListPostHttpQueryServiceInput,
   ) => Promise<Result<PostsResponse, AppError<Status<"InternalServerError">>>>;
 };
 
@@ -87,7 +81,7 @@ export class ListPostHttpQueryService implements IListPostHttpQueryService {
   constructor(private readonly postRepository: IPostRepository) {}
 
   async exec(
-    input: ListPostQueryServiceInput,
+    input: ListPostHttpQueryServiceInput,
   ): Promise<Result<PostsResponse, AppError<Status<"InternalServerError">>>> {
     const prisma = new PrismaClient();
 
@@ -101,7 +95,8 @@ export class ListPostHttpQueryService implements IListPostHttpQueryService {
     });
 
     const totalCount = await this.postRepository.count();
-    const dtoOrError = ListPostQueryServiceDto.create(posts, input, totalCount);
+    const paginationDto = new ListPostPaginationHttpQueryServiceDto(input, totalCount);
+    const dtoOrError = ListPostHttpQueryServiceDto.create(posts, paginationDto);
     if (dtoOrError.isErr()) {
       return err(dtoOrError.error);
     }

@@ -1,4 +1,4 @@
-export const generateRandomArray = <T>(
+export const createRandomSizeArray = <T>(
   { min, max }: { min?: number; max: number },
   fn: () => T,
 ): T[] => {
@@ -11,4 +11,10 @@ export const generateRandomArray = <T>(
 
   const length = Math.floor(Math.random() * (max - (min || 0)) + (min || 0));
   return Array.from({ length }, fn);
+};
+
+export const objectValuesToArray = <T, U>(obj: Record<string, T>, fn: (value: T) => U): U[] => {
+  return Object.values(obj).map((value) => {
+    return fn(value);
+  });
 };

@@ -1,4 +1,4 @@
-import { ListPostQueryServiceInput } from "@/application/query-service/http/post/list";
+import { ListPostHttpQueryServiceInput } from "@/application/query-service/http/post/list";
 import type { IPostHttpQueryService } from "@/application/query-service/http/post/post";
 import type { IPostUseCase } from "@/application/use-case/post/use-case";
 import { StatusCode } from "@/core/error";
@@ -28,7 +28,7 @@ export class PostHandler {
   async list(c: Context) {
     const query = PostsQuerySchema.parse(c.req.query());
 
-    const input = new ListPostQueryServiceInput(query.limit, query.page, query.sort);
+    const input = new ListPostHttpQueryServiceInput(query.limit, query.page, query.sort);
     const result = await this.postHttpQueryService.list.exec(input);
     if (result.isErr()) {
       return c.json({ message: result.error.message }, result.error.code);

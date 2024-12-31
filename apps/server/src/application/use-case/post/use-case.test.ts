@@ -2,8 +2,8 @@ import { AppError, StatusCode } from "@/core/error";
 import { Post, PostId } from "@/domain/model/post";
 import type { IPostRepository } from "@/domain/repository/post";
 import { createPostMock } from "@/tests/mocks/post";
-import { generateRandomArray } from "@/tests/utils/array";
 import { fixDate } from "@/tests/utils/fake-timer";
+import { createRandomSizeArray } from "@/utils/array";
 import { faker } from "@faker-js/faker";
 import { err, ok } from "neverthrow";
 import { describe, expect, it, vi } from "vitest";
@@ -189,7 +189,7 @@ describe("PostUseCase", () => {
   });
 
   describe("deleteMultiple", () => {
-    const ids = generateRandomArray({ min: 2, max: 5 }, () => new PostId(faker.string.uuid()));
+    const ids = createRandomSizeArray({ min: 2, max: 5 }, () => new PostId(faker.string.uuid()));
     const command = {
       getPostIds: () => ids,
     } satisfies IDeleteMultiplePostCommand;
