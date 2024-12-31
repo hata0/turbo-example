@@ -5,4 +5,9 @@ export default defineConfig({
     clearMocks: true,
     environment: "node",
   },
+  resolve: {
+    alias: {
+      "@/": new URL("./src/", import.meta.url).pathname,
+    },
+  },
 });

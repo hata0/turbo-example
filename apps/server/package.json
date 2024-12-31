@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "tsx watch src/cmd/index.ts",
     "lint": "biome check . && tsc --incremental false --noEmit",
-    "fix": "biome check --fix --unsafe ."
+    "fix": "biome check --fix --unsafe .",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "zod-validation-error": "^3.4.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.2.0",
     "@types/node": "^22.10.1",
     "prisma": "^6.0.0",
     "tsx": "^4.19.2",
