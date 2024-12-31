@@ -1,6 +1,7 @@
 import { ListPostQueryServiceInput } from "@/application/query-service/http/post/list";
 import type { IPostHttpQueryService } from "@/application/query-service/http/post/post";
 import type { IPostUseCase } from "@/application/use-case/post/use-case";
+import { StatusCode } from "@/core/error";
 import {
   CreatePostHttpCommand,
   DeleteMultiplePostHttpCommand,
@@ -36,7 +37,7 @@ export class PostHandler {
     const posts = result.value.posts.map((p) => PostSchema.parse(p));
     const pagination = PaginationResponseSchema.parse(result.value.pagination);
 
-    return c.json({ posts, pagination }, 200);
+    return c.json({ posts, pagination }, StatusCode.Ok);
   }
 
   async create(c: Context) {
@@ -48,7 +49,7 @@ export class PostHandler {
       return c.json({ message: result.error.message }, result.error.code);
     }
 
-    return c.json({ message: "Success" }, 200);
+    return c.json({ message: "Success" }, StatusCode.Ok);
   }
 
   async update(c: Context) {
@@ -61,7 +62,7 @@ export class PostHandler {
       return c.json({ message: result.error.message }, result.error.code);
     }
 
-    return c.json({ message: "Success" }, 200);
+    return c.json({ message: "Success" }, StatusCode.Ok);
   }
 
   async delete(c: Context) {
@@ -73,7 +74,7 @@ export class PostHandler {
       return c.json({ message: result.error.message }, result.error.code);
     }
 
-    return c.json({ message: "Success" }, 200);
+    return c.json({ message: "Success" }, StatusCode.Ok);
   }
 
   async deleteMultiple(c: Context) {
@@ -85,6 +86,6 @@ export class PostHandler {
       return c.json({ message: result.error.message }, result.error.code);
     }
 
-    return c.json({ message: "Success" }, 200);
+    return c.json({ message: "Success" }, StatusCode.Ok);
   }
 }

@@ -1,3 +1,4 @@
+import { StatusCode } from "@/core/error";
 import type { Context, ValidationTargets } from "hono";
 import type { ZodError } from "zod";
 import { fromError } from "zod-validation-error";
@@ -17,6 +18,6 @@ type Result =
 
 export const handleZodError = (result: Result, c: Context) => {
   if (!result.success) {
-    return c.json({ message: fromError(result.error).toString() }, 400);
+    return c.json({ message: fromError(result.error).toString() }, StatusCode.BadRequest);
   }
 };

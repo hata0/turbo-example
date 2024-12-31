@@ -1,4 +1,4 @@
-import { AppError, StatusCode, type StatusCodeType } from "@/core/error";
+import { AppError, type Status, StatusCode } from "@/core/error";
 import { Post, PostId } from "@/domain/model/post";
 import type { IPostRepository } from "@/domain/repository/post";
 import type { PostsResponse } from "@/openapi/schemas/post";
@@ -44,7 +44,7 @@ export class ListPostQueryServiceDto implements PostsResponse {
     posts: Post[],
     input: ListPostQueryServiceInput,
     totalCount: number,
-  ): Result<ListPostQueryServiceDto, AppError<StatusCodeType["InternalServerError"]>> {
+  ): Result<ListPostQueryServiceDto, AppError<Status<"InternalServerError">>> {
     const postsOrError = fromThrowable(
       () =>
         posts.map((p) => {
@@ -80,7 +80,7 @@ export class ListPostQueryServiceDto implements PostsResponse {
 export type IListPostHttpQueryService = {
   exec: (
     input: ListPostQueryServiceInput,
-  ) => Promise<Result<PostsResponse, AppError<StatusCodeType["InternalServerError"]>>>;
+  ) => Promise<Result<PostsResponse, AppError<Status<"InternalServerError">>>>;
 };
 
 export class ListPostHttpQueryService implements IListPostHttpQueryService {
@@ -88,7 +88,7 @@ export class ListPostHttpQueryService implements IListPostHttpQueryService {
 
   async exec(
     input: ListPostQueryServiceInput,
-  ): Promise<Result<PostsResponse, AppError<StatusCodeType["InternalServerError"]>>> {
+  ): Promise<Result<PostsResponse, AppError<Status<"InternalServerError">>>> {
     const prisma = new PrismaClient();
 
     const postRecords = await prisma.post.findMany({

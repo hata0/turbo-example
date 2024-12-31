@@ -12,4 +12,4 @@ export const StatusCode = {
   InternalServerError: 500,
 } as const;
 
-export type StatusCodeType = typeof StatusCode;
+export type Status<T extends keyof typeof StatusCode> = (typeof StatusCode)[T];

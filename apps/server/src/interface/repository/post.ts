@@ -1,4 +1,4 @@
-import { AppError, StatusCode, type StatusCodeType } from "@/core/error";
+import { AppError, type Status, StatusCode } from "@/core/error";
 import { Post, PostId } from "@/domain/model/post";
 import type { IPostRepository } from "@/domain/repository/post";
 import type { Post as PostRecord, PrismaClient } from "@prisma/client";
@@ -9,9 +9,7 @@ export class PostRepository implements IPostRepository {
 
   async findById(
     id: PostId,
-  ): Promise<
-    Result<Post, AppError<StatusCodeType["NotFound"] | StatusCodeType["InternalServerError"]>>
-  > {
+  ): Promise<Result<Post, AppError<Status<"NotFound" | "InternalServerError">>>> {
     const idOrError = id.toString();
     if (idOrError.isErr()) {
       return err(idOrError.error);
@@ -31,7 +29,7 @@ export class PostRepository implements IPostRepository {
     return await this.prisma.post.count();
   }
 
-  async save(post: Post): Promise<Result<Post, AppError<StatusCodeType["InternalServerError"]>>> {
+  async save(post: Post): Promise<Result<Post, AppError<Status<"InternalServerError">>>> {
     if (post.id.value !== null) {
       return err(new AppError(StatusCode.InternalServerError, "Id must be null"));
     }
@@ -47,7 +45,7 @@ export class PostRepository implements IPostRepository {
     return ok(this.mapToPost(record));
   }
 
-  async update(post: Post): Promise<Result<Post, AppError<StatusCodeType["InternalServerError"]>>> {
+  async update(post: Post): Promise<Result<Post, AppError<Status<"InternalServerError">>>> {
     const idOrError = post.id.toString();
     if (idOrError.isErr()) {
       return err(idOrError.error);
@@ -63,9 +61,7 @@ export class PostRepository implements IPostRepository {
     return ok(this.mapToPost(record));
   }
 
-  async delete(
-    post: Post,
-  ): Promise<Result<undefined, AppError<StatusCodeType["InternalServerError"]>>> {
+  async delete(post: Post): Promise<Result<undefined, AppError<Status<"InternalServerError">>>> {
     const idOrError = post.id.toString();
     if (idOrError.isErr()) {
       return err(idOrError.error);
@@ -78,7 +74,7 @@ export class PostRepository implements IPostRepository {
 
   async deleteMultiple(
     ids: PostId[],
-  ): Promise<Result<undefined, AppError<StatusCodeType["InternalServerError"]>>> {
+  ): Promise<Result<undefined, AppError<Status<"InternalServerError">>>> {
     const idsOrError = fromThrowable(
       () =>
         ids.map((id) => {
