@@ -37,7 +37,7 @@ export type PostResponse = z.infer<typeof PostResponseSchema>;
 
 export const PostsQuerySchema = z
   .object({
-    sort: z.enum(["latest", "oldest"]).openapi({ example: "latest" }),
+    sort: z.enum(["newest", "oldest"]).openapi({ example: "newest" }),
   })
   .extend(PaginationQuerySchema.shape)
   .openapi("PostsQuery");
@@ -65,8 +65,8 @@ export type CreatePostBody = z.infer<typeof CreatePostBodySchema>;
 
 export const UpdatePostBodySchema = z
   .object({
-    title: z.string().optional().openapi({ example: "foo" }),
-    body: z.string().optional().openapi({
+    title: z.string().openapi({ example: "foo" }),
+    body: z.string().openapi({
       example:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc condimentum feugiat nunc, id elementum nulla venenatis ut. Praesent non nunc ultrices, consequat arcu sit amet, auctor lacus. Maecenas libero sem, tincidunt ut sapien quis, elementum vehicula augue. Cras non cursus nulla. Suspendisse congue posuere accumsan. Vivamus ut sollicitudin ligula. In viverra tellus vel porttitor feugiat. Ut bibendum turpis sed mauris egestas ultricies.",
     }),

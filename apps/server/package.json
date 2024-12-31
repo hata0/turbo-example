@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch src/cmd/index.ts",
     "lint": "biome check . && tsc --incremental false --noEmit",
     "fix": "biome check --fix --unsafe ."
   },

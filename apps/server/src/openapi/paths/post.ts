@@ -36,6 +36,14 @@ export const listPostRoute = createRoute({
       },
       description: "エラーを返す",
     },
+    500: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "サーバーエラーを返す",
+    },
   },
 });
 
@@ -94,10 +102,10 @@ export const createPostRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: PostResponseSchema,
+          schema: SuccessResponseSchema,
         },
       },
-      description: "作成したポストを返す",
+      description: "成功を返す",
     },
     400: {
       content: {
@@ -138,10 +146,10 @@ export const updatePostRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: PostResponseSchema,
+          schema: SuccessResponseSchema,
         },
       },
-      description: "更新したポストを返す",
+      description: "成功を返す",
     },
     400: {
       content: {
@@ -150,6 +158,14 @@ export const updatePostRoute = createRoute({
         },
       },
       description: "エラーを返す",
+    },
+    404: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "404エラーを返す",
     },
     500: {
       content: {
@@ -187,6 +203,14 @@ export const deletePostRoute = createRoute({
       },
       description: "エラーを返す",
     },
+    404: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "404エラーを返す",
+    },
     500: {
       content: {
         "application/json": {
@@ -221,6 +245,14 @@ export const deleteManyPostRoute = createRoute({
         },
       },
       description: "成功を返す",
+    },
+    500: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "サーバーエラーを返す",
     },
   },
 });
