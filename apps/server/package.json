@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/cmd/index.ts",
     "lint": "biome check . && tsc --incremental false --noEmit",
