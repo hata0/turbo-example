@@ -1,20 +1,20 @@
 import type { PostId } from "@/domain/model/post";
 
-export type CreatePostCommand = {
+export type ICreatePostCommand = {
   getPostTitle: () => string;
   getPostBody: () => string;
 };
 
-export type EditPostCommand = {
+export type IEditPostCommand = {
   getPostId: () => PostId;
   getPostTitle: () => string;
   getPostBody: () => string;
 };
 
-export type DeletePostCommand = {
+export type IDeletePostCommand = {
   getPostId: () => PostId;
 };
 
-export type DeleteMultiplePostCommand = {
+export type IDeleteMultiplePostCommand = {
   getPostIds: () => PostId[];
 };

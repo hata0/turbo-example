@@ -3,24 +3,24 @@ import { Post } from "@/domain/model/post";
 import type { IPostRepository } from "@/domain/repository/post";
 import { type Result, err, ok } from "neverthrow";
 import type {
-  CreatePostCommand,
-  DeleteMultiplePostCommand,
-  DeletePostCommand,
-  EditPostCommand,
+  ICreatePostCommand,
+  IDeleteMultiplePostCommand,
+  IDeletePostCommand,
+  IEditPostCommand,
 } from "./command";
 
 export type IPostUseCase = {
   create: (
-    command: CreatePostCommand,
+    command: ICreatePostCommand,
   ) => Promise<Result<undefined, AppError<Status<"InternalServerError">>>>;
   edit: (
-    command: EditPostCommand,
+    command: IEditPostCommand,
   ) => Promise<Result<undefined, AppError<Status<"NotFound" | "InternalServerError">>>>;
   delete: (
-    command: DeletePostCommand,
+    command: IDeletePostCommand,
   ) => Promise<Result<undefined, AppError<Status<"NotFound" | "InternalServerError">>>>;
   deleteMultiple: (
-    command: DeleteMultiplePostCommand,
+    command: IDeleteMultiplePostCommand,
   ) => Promise<Result<undefined, AppError<Status<"InternalServerError">>>>;
 };
 
@@ -28,7 +28,7 @@ export class PostUseCase implements IPostUseCase {
   constructor(private readonly postRepository: IPostRepository) {}
 
   async create(
-    command: CreatePostCommand,
+    command: ICreatePostCommand,
   ): Promise<Result<undefined, AppError<Status<"InternalServerError">>>> {
     const post = Post.createNew(command.getPostTitle(), command.getPostBody());
     const newPostOrError = await this.postRepository.save(post);
@@ -39,7 +39,7 @@ export class PostUseCase implements IPostUseCase {
   }
 
   async edit(
-    command: EditPostCommand,
+    command: IEditPostCommand,
   ): Promise<Result<undefined, AppError<Status<"NotFound" | "InternalServerError">>>> {
     const postOrError = await this.postRepository.findById(command.getPostId());
     if (postOrError.isErr()) {
@@ -54,7 +54,7 @@ export class PostUseCase implements IPostUseCase {
   }
 
   async delete(
-    command: DeletePostCommand,
+    command: IDeletePostCommand,
   ): Promise<Result<undefined, AppError<Status<"NotFound" | "InternalServerError">>>> {
     const postOrError = await this.postRepository.findById(command.getPostId());
     if (postOrError.isErr()) {
@@ -68,7 +68,7 @@ export class PostUseCase implements IPostUseCase {
   }
 
   async deleteMultiple(
-    command: DeleteMultiplePostCommand,
+    command: IDeleteMultiplePostCommand,
   ): Promise<Result<undefined, AppError<Status<"InternalServerError">>>> {
     const res = await this.postRepository.deleteMultiple(command.getPostIds());
     if (res.isErr()) {

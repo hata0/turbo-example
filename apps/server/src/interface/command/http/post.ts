@@ -1,12 +1,12 @@
 import type {
-  CreatePostCommand,
-  DeleteMultiplePostCommand,
-  DeletePostCommand,
-  EditPostCommand,
+  ICreatePostCommand,
+  IDeleteMultiplePostCommand,
+  IDeletePostCommand,
+  IEditPostCommand,
 } from "@/application/use-case/post/command";
 import { PostId } from "@/domain/model/post";
 
-export class CreatePostHttpCommand implements CreatePostCommand {
+export class CreatePostHttpCommand implements ICreatePostCommand {
   constructor(
     private readonly title: string,
     private readonly body: string,
@@ -21,7 +21,7 @@ export class CreatePostHttpCommand implements CreatePostCommand {
   }
 }
 
-export class EditPostHttpCommand implements EditPostCommand {
+export class EditPostHttpCommand implements IEditPostCommand {
   constructor(
     private readonly id: string,
     private readonly title: string,
@@ -41,7 +41,7 @@ export class EditPostHttpCommand implements EditPostCommand {
   }
 }
 
-export class DeletePostHttpCommand implements DeletePostCommand {
+export class DeletePostHttpCommand implements IDeletePostCommand {
   constructor(private readonly id: string) {}
 
   getPostId(): PostId {
@@ -49,7 +49,7 @@ export class DeletePostHttpCommand implements DeletePostCommand {
   }
 }
 
-export class DeleteMultiplePostHttpCommand implements DeleteMultiplePostCommand {
+export class DeleteMultiplePostHttpCommand implements IDeleteMultiplePostCommand {
   constructor(private readonly ids: string[]) {}
 
   getPostIds(): PostId[] {

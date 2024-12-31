@@ -1,4 +1,5 @@
-import { faker } from "@faker-js/faker";
+import { createPostMock } from "@/tests/mocks/post";
+import { fixDate } from "@/tests/utils/fake-timer";
 import { describe, expect, it } from "vitest";
 import { Post, PostId } from "./post";
 
@@ -12,35 +13,31 @@ describe("PostId", () => {
 });
 
 describe("Post", () => {
+  const now = fixDate();
+
   describe("createNew", () => {
     it("新しいPostを返す", () => {
-      const title = faker.string.alpha();
-      const body = faker.lorem.lines();
+      const { title, body } = createPostMock();
       const post = Post.createNew(title, body);
       expect(post.id.value).toBeNull();
       expect(post.title).toBe(title);
       expect(post.body).toBe(body);
-      expect(post.createdAt).toBeInstanceOf(Date);
-      expect(post.updatedAt).toBeInstanceOf(Date);
+      expect(post.createdAt).toEqual(now);
+      expect(post.updatedAt).toEqual(now);
     });
   });
 
   describe("update", () => {
     it("更新されたPostを返す", () => {
-      const id = new PostId(faker.string.uuid());
-      const title = faker.string.alpha();
-      const body = faker.lorem.lines();
-      const updatedAt = faker.date.past();
-      const createdAt = faker.date.past({ refDate: updatedAt });
-      const post = new Post(id, title, body, createdAt, updatedAt);
-      const newTitle = faker.string.alpha();
-      const newBody = faker.lorem.lines();
-      const updatedPost = post.update(newTitle, newBody);
-      expect(updatedPost.id).toBe(id);
-      expect(updatedPost.title).toBe(newTitle);
-      expect(updatedPost.body).toBe(newBody);
-      expect(updatedPost.createdAt).toBe(createdAt);
-      expect(updatedPost.updatedAt).not.toBe(updatedAt);
+      const mock = createPostMock();
+      const post = new Post(mock.id, mock.title, mock.body, mock.createdAt, mock.updatedAt);
+      const newMock = createPostMock();
+      const updatedPost = post.update(newMock.title, newMock.body);
+      expect(updatedPost.id).toBe(mock.id);
+      expect(updatedPost.title).toBe(newMock.title);
+      expect(updatedPost.body).toBe(newMock.body);
+      expect(updatedPost.createdAt).toBe(mock.createdAt);
+      expect(updatedPost.updatedAt).toEqual(now);
     });
   });
 });
