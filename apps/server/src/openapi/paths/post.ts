@@ -14,7 +14,7 @@ import { SuccessResponseSchema } from "../schemas/success";
 export const listPostRoute = createRoute({
   tags: ["posts"],
   method: "get",
-  path: "/",
+  path: "/posts",
   summary: "ポスト一覧を取得",
   request: {
     query: PostsQuerySchema,
@@ -50,7 +50,7 @@ export const listPostRoute = createRoute({
 export const getPostRoute = createRoute({
   tags: ["posts"],
   method: "get",
-  path: "/{id}",
+  path: "/posts/{id}",
   summary: "ポストを取得",
   request: {
     params: PostParamsSchema,
@@ -86,7 +86,7 @@ export const getPostRoute = createRoute({
 export const createPostRoute = createRoute({
   tags: ["posts"],
   method: "post",
-  path: "/",
+  path: "/posts",
   summary: "ポストを作成",
   request: {
     body: {
@@ -129,7 +129,7 @@ export const createPostRoute = createRoute({
 export const updatePostRoute = createRoute({
   tags: ["posts"],
   method: "put",
-  path: "/{id}",
+  path: "/posts/{id}",
   summary: "ポストの更新",
   request: {
     params: PostParamsSchema,
@@ -181,7 +181,7 @@ export const updatePostRoute = createRoute({
 export const deletePostRoute = createRoute({
   tags: ["posts"],
   method: "delete",
-  path: "/{id}",
+  path: "/posts/{id}",
   summary: "ポストを削除",
   request: {
     params: PostParamsSchema,
@@ -225,7 +225,7 @@ export const deletePostRoute = createRoute({
 export const deleteManyPostRoute = createRoute({
   tags: ["posts"],
   method: "delete",
-  path: "/",
+  path: "/posts",
   summary: "ポストを複数削除",
   request: {
     body: {
@@ -245,6 +245,14 @@ export const deleteManyPostRoute = createRoute({
         },
       },
       description: "成功を返す",
+    },
+    400: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "エラーを返す",
     },
     500: {
       content: {

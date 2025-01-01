@@ -1,4 +1,3 @@
-import { ListPostHttpQueryService } from "@/application/query-service/http/post/list";
 import { PostHttpQueryService } from "@/application/query-service/http/post/post";
 import { PostUseCase } from "@/application/use-case/post/use-case";
 import { PostRepository } from "@/interface/repository/post";
@@ -14,9 +13,7 @@ export class PostInjector {
     const postRepository = new PostRepository(prisma);
 
     this.postUseCase = new PostUseCase(postRepository);
-    this.postHttpQueryService = new PostHttpQueryService(
-      new ListPostHttpQueryService(postRepository),
-    );
+    this.postHttpQueryService = new PostHttpQueryService(postRepository);
   }
 
   get handler(): PostHandler {

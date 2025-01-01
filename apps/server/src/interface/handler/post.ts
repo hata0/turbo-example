@@ -18,6 +18,7 @@ import {
   UpdatePostBodySchema,
 } from "@/openapi/schemas/post";
 import type { Context } from "hono";
+import { parseJsonBody } from "./util";
 
 export class PostHandler {
   constructor(
@@ -41,7 +42,11 @@ export class PostHandler {
   }
 
   async create(c: Context) {
-    const body = CreatePostBodySchema.parse(await c.req.json());
+    const bodyOrError = await parseJsonBody(c);
+    if (bodyOrError.isErr()) {
+      return bodyOrError.error;
+    }
+    const body = CreatePostBodySchema.parse(bodyOrError.value);
 
     const command = new CreatePostHttpCommand(body.title, body.body);
     const result = await this.postUseCase.create(command);
@@ -53,7 +58,11 @@ export class PostHandler {
   }
 
   async update(c: Context) {
-    const body = UpdatePostBodySchema.parse(await c.req.json());
+    const bodyOrError = await parseJsonBody(c);
+    if (bodyOrError.isErr()) {
+      return bodyOrError.error;
+    }
+    const body = UpdatePostBodySchema.parse(bodyOrError.value);
     const param = PostParamsSchema.parse(c.req.param());
 
     const command = new EditPostHttpCommand(param.id, body.title, body.body);
@@ -78,7 +87,11 @@ export class PostHandler {
   }
 
   async deleteMultiple(c: Context) {
-    const body = DeleteManyPostBodySchema.parse(await c.req.json());
+    const bodyOrError = await parseJsonBody(c);
+    if (bodyOrError.isErr()) {
+      return bodyOrError.error;
+    }
+    const body = DeleteManyPostBodySchema.parse(bodyOrError.value);
 
     const command = new DeleteMultiplePostHttpCommand(body.ids);
     const result = await this.postUseCase.deleteMultiple(command);

@@ -1,24 +1,15 @@
 import { AppError, StatusCode } from "@/core/error";
 import { Post, PostId } from "@/domain/model/post";
-import { createPostMock } from "@/tests/mocks/post";
+import { createBasePaginationDtoMock } from "@/tests/mocks/pagination";
+import { createListPostInputMock, createPostMock } from "@/tests/mocks/post";
 import { createRandomSizeArray, objectValuesToArray } from "@/utils/array";
-import { faker } from "@faker-js/faker";
 import { err } from "neverthrow";
 import { describe, expect, it } from "vitest";
 import {
   ListPostHttpQueryServiceDto,
   ListPostHttpQueryServiceInput,
-  ListPostPaginationHttpQueryServiceDto,
   PostSortPattern,
 } from "./list";
-
-const createInputMock = () => {
-  const limit = faker.number.int({ min: 1, max: 40 });
-  const page = faker.number.int({ min: 1, max: 50 });
-  const sort = faker.helpers.arrayElement(objectValuesToArray(PostSortPattern, (s) => s));
-
-  return { limit, page, sort };
-};
 
 describe("ListPostQueryServiceInput", () => {
   describe("getOrderBy", () => {
@@ -29,7 +20,7 @@ describe("ListPostQueryServiceInput", () => {
       };
 
       objectValuesToArray(PostSortPattern, (sort) => {
-        const { limit, page } = createInputMock();
+        const { limit, page } = createListPostInputMock();
 
         const input = new ListPostHttpQueryServiceInput(limit, page, sort);
         const orderBy = input.getOrderBy();
@@ -42,11 +33,7 @@ describe("ListPostQueryServiceInput", () => {
 
 describe("ListPostQueryServiceDto", () => {
   describe("create", () => {
-    const { limit, page, sort } = createInputMock();
-    const totalCount = faker.number.int({ min: 2000, max: 5000 });
-    const input = new ListPostHttpQueryServiceInput(limit, page, sort);
-
-    const pagination = new ListPostPaginationHttpQueryServiceDto(input, totalCount);
+    const pagination = createBasePaginationDtoMock();
 
     it("dtoをokとして返す", () => {
       const posts = createRandomSizeArray({ min: 1, max: 10 }, () => {

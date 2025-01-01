@@ -53,7 +53,6 @@ export type PostsResponse = z.infer<typeof PostsResponseSchema>;
 
 export const CreatePostBodySchema = z
   .object({
-    profileId: z.string().openapi({ example: "abc123def" }),
     title: z.string().openapi({ example: "foo" }),
     body: z.string().openapi({
       example:
