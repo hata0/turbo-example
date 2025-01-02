@@ -8,17 +8,16 @@ import {
   DeletePostHttpCommand,
   EditPostHttpCommand,
 } from "@/interface/command/http/post";
-import { PaginationResponseSchema } from "@/openapi/schema/pagination";
 import {
-  CreatePostBodySchema,
-  DeleteManyPostBodySchema,
-  PostParamsSchema,
-  PostSchema,
-  PostsQuerySchema,
-  UpdatePostBodySchema,
-} from "@/openapi/schema/post";
-import type { Context } from "hono";
-import { parseJsonBody } from "./util";
+  createPostRoute,
+  deleteManyPostRoute,
+  deletePostRoute,
+  listPostRoute,
+  updatePostRoute,
+} from "@/openapi/path/post";
+import { PaginationResponseSchema } from "@/openapi/schema/pagination";
+import { PostSchema } from "@/openapi/schema/post";
+import type { OpenAPIHono } from "@hono/zod-openapi";
 
 export class PostHandler {
   constructor(
@@ -26,79 +25,87 @@ export class PostHandler {
     private readonly postHttpQueryService: IPostHttpQueryService,
   ) {}
 
-  async list(c: Context) {
-    const query = PostsQuerySchema.parse(c.req.query());
+  list(app: OpenAPIHono) {
+    app.openapi(listPostRoute, async (c) => {
+      const query = c.req.valid("query");
 
-    const input = new ListPostHttpQueryServiceInput(query.limit, query.page, query.sort);
-    const result = await this.postHttpQueryService.list.exec(input);
-    if (result.isErr()) {
-      return c.json({ message: result.error.message }, result.error.code);
-    }
+      const input = new ListPostHttpQueryServiceInput(query.limit, query.page, query.sort);
+      const result = await this.postHttpQueryService.list.exec(input);
+      if (result.isErr()) {
+        return c.json({ message: result.error.message }, result.error.code);
+      }
 
-    const posts = result.value.posts.map((p) => PostSchema.parse(p));
-    const pagination = PaginationResponseSchema.parse(result.value.pagination);
+      const posts = result.value.posts.map((p) => PostSchema.parse(p));
+      const pagination = PaginationResponseSchema.parse(result.value.pagination);
 
-    return c.json({ posts, pagination }, StatusCode.Ok);
+      return c.json({ posts, pagination }, StatusCode.Ok);
+    });
+
+    return app;
   }
 
-  async create(c: Context) {
-    const bodyOrError = await parseJsonBody(c);
-    if (bodyOrError.isErr()) {
-      return bodyOrError.error;
-    }
-    const body = CreatePostBodySchema.parse(bodyOrError.value);
+  async create(app: OpenAPIHono) {
+    app.openapi(createPostRoute, async (c) => {
+      const body = c.req.valid("json");
 
-    const command = new CreatePostHttpCommand(body.title, body.body);
-    const result = await this.postUseCase.create(command);
-    if (result.isErr()) {
-      return c.json({ message: result.error.message }, result.error.code);
-    }
+      const command = new CreatePostHttpCommand(body.title, body.body);
+      const result = await this.postUseCase.create(command);
+      if (result.isErr()) {
+        return c.json({ message: result.error.message }, result.error.code);
+      }
 
-    return c.json({ message: "Success" }, StatusCode.Ok);
+      return c.json({ message: "Success" }, StatusCode.Ok);
+    });
+
+    return app;
   }
 
-  async update(c: Context) {
-    const bodyOrError = await parseJsonBody(c);
-    if (bodyOrError.isErr()) {
-      return bodyOrError.error;
-    }
-    const body = UpdatePostBodySchema.parse(bodyOrError.value);
-    const param = PostParamsSchema.parse(c.req.param());
+  async update(app: OpenAPIHono) {
+    app.openapi(updatePostRoute, async (c) => {
+      const body = c.req.valid("json");
+      const param = c.req.valid("param");
 
-    const command = new EditPostHttpCommand(param.id, body.title, body.body);
-    const result = await this.postUseCase.edit(command);
-    if (result.isErr()) {
-      return c.json({ message: result.error.message }, result.error.code);
-    }
+      const command = new EditPostHttpCommand(param.id, body.title, body.body);
+      const result = await this.postUseCase.edit(command);
+      if (result.isErr()) {
+        return c.json({ message: result.error.message }, result.error.code);
+      }
 
-    return c.json({ message: "Success" }, StatusCode.Ok);
+      return c.json({ message: "Success" }, StatusCode.Ok);
+    });
+
+    return app;
   }
 
-  async delete(c: Context) {
-    const param = PostParamsSchema.parse(c.req.param());
+  async delete(app: OpenAPIHono) {
+    app.openapi(deletePostRoute, async (c) => {
+      const param = c.req.valid("param");
 
-    const command = new DeletePostHttpCommand(param.id);
-    const result = await this.postUseCase.delete(command);
-    if (result.isErr()) {
-      return c.json({ message: result.error.message }, result.error.code);
-    }
+      const command = new DeletePostHttpCommand(param.id);
+      const result = await this.postUseCase.delete(command);
+      if (result.isErr()) {
+        return c.json({ message: result.error.message }, result.error.code);
+      }
 
-    return c.json({ message: "Success" }, StatusCode.Ok);
+      return c.json({ message: "Success" }, StatusCode.Ok);
+    });
+
+    return app;
   }
 
-  async deleteMultiple(c: Context) {
-    const bodyOrError = await parseJsonBody(c);
-    if (bodyOrError.isErr()) {
-      return bodyOrError.error;
-    }
-    const body = DeleteManyPostBodySchema.parse(bodyOrError.value);
+  async deleteMultiple(app: OpenAPIHono) {
+    app.openapi(deleteManyPostRoute, async (c) => {
+      const body = c.req.valid("json");
 
-    const command = new DeleteMultiplePostHttpCommand(body.ids);
-    const result = await this.postUseCase.deleteMultiple(command);
-    if (result.isErr()) {
-      return c.json({ message: result.error.message }, result.error.code);
-    }
+      const command = new DeleteMultiplePostHttpCommand(body.ids);
+      const result = await this.postUseCase.deleteMultiple(command);
+      if (result.isErr()) {
+        return c.json({ message: result.error.message }, result.error.code);
+      }
 
-    return c.json({ message: "Success" }, StatusCode.Ok);
+      return c.json({ message: "Success" }, StatusCode.Ok);
+    });
+
+    return app;
   }
 }

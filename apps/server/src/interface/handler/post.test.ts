@@ -5,13 +5,6 @@ import {
 import type { IPostHttpQueryService } from "@/application/query-service/http/post/post";
 import type { IPostUseCase } from "@/application/use-case/post/use-case";
 import { AppError, StatusCode } from "@/core/error";
-import {
-  createPostRoute,
-  deleteManyPostRoute,
-  deletePostRoute,
-  listPostRoute,
-  updatePostRoute,
-} from "@/openapi/path/post";
 import { createBasePaginationDtoMock } from "@/test/mock/pagination";
 import { createListPostInputMock, createPostMock } from "@/test/mock/post";
 import { RequestClient } from "@/test/util/request";
@@ -60,7 +53,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(listPostRoute, (c) => handler.list(c));
+      handler.list(app);
 
       const client = new RequestClient(app, "/posts");
       const { limit, page, sort } = createListPostInputMock();
@@ -82,7 +75,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(listPostRoute, (c) => handler.list(c));
+      handler.list(app);
 
       const client = new RequestClient(app, "/posts");
       const { limit, page, sort } = createListPostInputMock();
@@ -100,7 +93,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(createPostRoute, (c) => handler.create(c));
+      handler.create(app);
 
       const client = new RequestClient(app, "/posts");
       const { title, body } = createPostMock();
@@ -122,7 +115,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(createPostRoute, (c) => handler.create(c));
+      handler.create(app);
 
       const client = new RequestClient(app, "/posts");
       const { title, body } = createPostMock();
@@ -140,7 +133,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(updatePostRoute, (c) => handler.update(c));
+      handler.update(app);
 
       const client = new RequestClient(app, "/posts");
       const { id, title, body } = createPostMock();
@@ -164,7 +157,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(updatePostRoute, (c) => handler.update(c));
+      handler.update(app);
 
       const client = new RequestClient(app, "/posts");
       const { id, title, body } = createPostMock();
@@ -184,7 +177,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(deletePostRoute, (c) => handler.delete(c));
+      handler.delete(app);
 
       const client = new RequestClient(app, "/posts");
       const { id } = createPostMock();
@@ -206,7 +199,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(deletePostRoute, (c) => handler.delete(c));
+      handler.delete(app);
 
       const client = new RequestClient(app, "/posts");
       const id = createPostMock().id.toString()._unsafeUnwrap();
@@ -224,7 +217,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(deleteManyPostRoute, (c) => handler.deleteMultiple(c));
+      handler.deleteMultiple(app);
 
       const client = new RequestClient(app, "/posts");
       const ids = createRandomSizeArray({ min: 1, max: 10 }, () => {
@@ -248,7 +241,7 @@ describe("PostHandler", () => {
 
       const handler = new PostHandler(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      app.openapi(deleteManyPostRoute, (c) => handler.deleteMultiple(c));
+      handler.deleteMultiple(app);
 
       const client = new RequestClient(app, "/posts");
       const ids = createRandomSizeArray({ min: 1, max: 10 }, () => {

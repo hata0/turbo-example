@@ -14,6 +14,7 @@ export class RequestClient {
     init?: Omit<RequestInit, "method" | "body"> & { body?: unknown },
   ) {
     const res = await this.app.request(`${this.baseUrl || ""}${input || ""}`, {
+      headers: init?.body ? new Headers({ "Content-Type": "application/json" }) : undefined,
       ...init,
       method,
       body: init?.body ? JSON.stringify(init.body) : undefined,
