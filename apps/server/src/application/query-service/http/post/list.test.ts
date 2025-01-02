@@ -2,7 +2,8 @@ import { AppError, StatusCode } from "@/core/error";
 import { Post, PostId } from "@/domain/model/post";
 import { createBasePaginationDtoMock } from "@/test/mock/pagination";
 import { createListPostInputMock, createPostMock } from "@/test/mock/post";
-import { createRandomSizeArray, objectValuesToArray } from "@/util/array";
+import { createRandomSizeArray } from "@/test/util/array";
+import { objectValuesToArray } from "@/util/array";
 import { err } from "neverthrow";
 import { describe, expect, it } from "vitest";
 import {
