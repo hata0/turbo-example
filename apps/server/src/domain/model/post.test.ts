@@ -1,5 +1,5 @@
-import { createPostMock } from "@/tests/mocks/post";
-import { fixDate } from "@/tests/utils/fake-timer";
+import { createPostMock } from "@/test/mock/post";
+import { fixDate } from "@/test/util/fake-timer";
 import { describe, expect, it } from "vitest";
 import { Post, PostId } from "./post";
 

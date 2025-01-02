@@ -1,9 +1,9 @@
 import { AppError, StatusCode } from "@/core/error";
 import { Post, PostId } from "@/domain/model/post";
 import type { IPostRepository } from "@/domain/repository/post";
-import { createPostMock } from "@/tests/mocks/post";
-import { fixDate } from "@/tests/utils/fake-timer";
-import { createRandomSizeArray } from "@/utils/array";
+import { createPostMock } from "@/test/mock/post";
+import { fixDate } from "@/test/util/fake-timer";
+import { createRandomSizeArray } from "@/util/array";
 import { faker } from "@faker-js/faker";
 import { err, ok } from "neverthrow";
 import { describe, expect, it, vi } from "vitest";

@@ -8,7 +8,7 @@ import {
   DeletePostHttpCommand,
   EditPostHttpCommand,
 } from "@/interface/command/http/post";
-import { PaginationResponseSchema } from "@/openapi/schemas/pagination";
+import { PaginationResponseSchema } from "@/openapi/schema/pagination";
 import {
   CreatePostBodySchema,
   DeleteManyPostBodySchema,
@@ -16,7 +16,7 @@ import {
   PostSchema,
   PostsQuerySchema,
   UpdatePostBodySchema,
-} from "@/openapi/schemas/post";
+} from "@/openapi/schema/post";
 import type { Context } from "hono";
 import { parseJsonBody } from "./util";
 

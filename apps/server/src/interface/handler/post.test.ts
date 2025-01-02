@@ -11,11 +11,11 @@ import {
   deletePostRoute,
   listPostRoute,
   updatePostRoute,
-} from "@/openapi/paths/post";
-import { createBasePaginationDtoMock } from "@/tests/mocks/pagination";
-import { createListPostInputMock, createPostMock } from "@/tests/mocks/post";
-import { RequestClient } from "@/tests/utils/request";
-import { createRandomSizeArray } from "@/utils/array";
+} from "@/openapi/path/post";
+import { createBasePaginationDtoMock } from "@/test/mock/pagination";
+import { createListPostInputMock, createPostMock } from "@/test/mock/post";
+import { RequestClient } from "@/test/util/request";
+import { createRandomSizeArray } from "@/util/array";
 import { faker } from "@faker-js/faker";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { err, ok } from "neverthrow";

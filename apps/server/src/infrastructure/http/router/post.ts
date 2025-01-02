@@ -4,7 +4,7 @@ import {
   deletePostRoute,
   listPostRoute,
   updatePostRoute,
-} from "@/openapi/paths/post";
+} from "@/openapi/path/post";
 import type { OpenAPIHono } from "@hono/zod-openapi";
 import { PostInjector } from "../injector/post";
 

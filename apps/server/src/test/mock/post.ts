@@ -1,6 +1,6 @@
 import { PostSortPattern } from "@/application/query-service/http/post/list";
 import { PostId } from "@/domain/model/post";
-import { objectValuesToArray } from "@/utils/array";
+import { objectValuesToArray } from "@/util/array";
 import { faker } from "@faker-js/faker";
 
 export const createPostMock = () => {

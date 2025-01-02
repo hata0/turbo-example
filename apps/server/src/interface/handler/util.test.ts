@@ -1,5 +1,5 @@
 import { StatusCode } from "@/core/error";
-import { RequestClient } from "@/tests/utils/request";
+import { RequestClient } from "@/test/util/request";
 import { faker } from "@faker-js/faker";
 import type { OpenAPIHono } from "@hono/zod-openapi";
 import { Hono } from "hono";

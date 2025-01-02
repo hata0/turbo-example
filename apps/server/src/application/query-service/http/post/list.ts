@@ -1,7 +1,7 @@
 import { AppError, type Status, StatusCode } from "@/core/error";
 import { Post, PostId } from "@/domain/model/post";
 import type { IPostRepository } from "@/domain/repository/post";
-import type { PostsResponse } from "@/openapi/schemas/post";
+import type { PostsResponse } from "@/openapi/schema/post";
 import { type Prisma, PrismaClient } from "@prisma/client";
 import { type Result, err, fromThrowable, ok } from "neverthrow";
 import { BasePaginationQueryServiceDto, BasePaginationQueryServiceInput } from "../../base";

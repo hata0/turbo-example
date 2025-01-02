@@ -1,6 +1,6 @@
 import { PostId } from "@/domain/model/post";
-import { createPostMock } from "@/tests/mocks/post";
-import { createRandomSizeArray } from "@/utils/array";
+import { createPostMock } from "@/test/mock/post";
+import { createRandomSizeArray } from "@/util/array";
 import { faker } from "@faker-js/faker";
 import { describe, expect, it } from "vitest";
 import {

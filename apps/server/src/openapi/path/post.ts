@@ -1,5 +1,5 @@
 import { createRoute } from "@hono/zod-openapi";
-import { ErrorResponseSchema } from "../schemas/error";
+import { ErrorResponseSchema } from "../schema/error";
 import {
   CreatePostBodySchema,
   DeleteManyPostBodySchema,
@@ -8,8 +8,8 @@ import {
   PostsQuerySchema,
   PostsResponseSchema,
   UpdatePostBodySchema,
-} from "../schemas/post";
-import { SuccessResponseSchema } from "../schemas/success";
+} from "../schema/post";
+import { SuccessResponseSchema } from "../schema/success";
 
 export const listPostRoute = createRoute({
   tags: ["posts"],
