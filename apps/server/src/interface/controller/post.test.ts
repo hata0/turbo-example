@@ -19,9 +19,9 @@ import {
   DeletePostHttpCommand,
   EditPostHttpCommand,
 } from "../command/http/post";
-import { PostHandler } from "./post";
+import { PostController } from "./post";
 
-describe("PostHandler", () => {
+describe("PostController", () => {
   const postUseCase = {
     create: vi.fn(),
     edit: vi.fn(),
@@ -51,9 +51,9 @@ describe("PostHandler", () => {
 
       postHttpQueryService.list.exec.mockResolvedValueOnce(ok(dto));
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.list(app);
+      controller.list(app);
 
       const client = new RequestClient(app, "/posts");
       const { limit, page, sort } = createListPostInputMock();
@@ -73,9 +73,9 @@ describe("PostHandler", () => {
         err(new AppError(StatusCode.InternalServerError, message)),
       );
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.list(app);
+      controller.list(app);
 
       const client = new RequestClient(app, "/posts");
       const { limit, page, sort } = createListPostInputMock();
@@ -91,9 +91,9 @@ describe("PostHandler", () => {
     it("200", async () => {
       postUseCase.create.mockResolvedValueOnce(ok(undefined));
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.create(app);
+      controller.create(app);
 
       const client = new RequestClient(app, "/posts");
       const { title, body } = createPostMock();
@@ -113,9 +113,9 @@ describe("PostHandler", () => {
         err(new AppError(StatusCode.InternalServerError, message)),
       );
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.create(app);
+      controller.create(app);
 
       const client = new RequestClient(app, "/posts");
       const { title, body } = createPostMock();
@@ -131,9 +131,9 @@ describe("PostHandler", () => {
     it("200", async () => {
       postUseCase.edit.mockResolvedValueOnce(ok(undefined));
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.update(app);
+      controller.update(app);
 
       const client = new RequestClient(app, "/posts");
       const { id, title, body } = createPostMock();
@@ -155,9 +155,9 @@ describe("PostHandler", () => {
         err(new AppError(StatusCode.InternalServerError, message)),
       );
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.update(app);
+      controller.update(app);
 
       const client = new RequestClient(app, "/posts");
       const { id, title, body } = createPostMock();
@@ -175,9 +175,9 @@ describe("PostHandler", () => {
     it("200", async () => {
       postUseCase.delete.mockResolvedValueOnce(ok(undefined));
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.delete(app);
+      controller.delete(app);
 
       const client = new RequestClient(app, "/posts");
       const { id } = createPostMock();
@@ -197,9 +197,9 @@ describe("PostHandler", () => {
         err(new AppError(StatusCode.InternalServerError, message)),
       );
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.delete(app);
+      controller.delete(app);
 
       const client = new RequestClient(app, "/posts");
       const id = createPostMock().id.toString()._unsafeUnwrap();
@@ -215,9 +215,9 @@ describe("PostHandler", () => {
     it("200", async () => {
       postUseCase.deleteMultiple.mockResolvedValueOnce(ok(undefined));
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.deleteMultiple(app);
+      controller.deleteMultiple(app);
 
       const client = new RequestClient(app, "/posts");
       const ids = createRandomSizeArray({ min: 1, max: 10 }, () => {
@@ -239,9 +239,9 @@ describe("PostHandler", () => {
         err(new AppError(StatusCode.InternalServerError, message)),
       );
 
-      const handler = new PostHandler(postUseCase, postHttpQueryService);
+      const controller = new PostController(postUseCase, postHttpQueryService);
       const app = new OpenAPIHono();
-      handler.deleteMultiple(app);
+      controller.deleteMultiple(app);
 
       const client = new RequestClient(app, "/posts");
       const ids = createRandomSizeArray({ min: 1, max: 10 }, () => {

@@ -19,7 +19,7 @@ import { PaginationResponseSchema } from "@/openapi/schema/pagination";
 import { PostSchema } from "@/openapi/schema/post";
 import type { OpenAPIHono } from "@hono/zod-openapi";
 
-export class PostHandler {
+export class PostController {
   constructor(
     private readonly postUseCase: IPostUseCase,
     private readonly postHttpQueryService: IPostHttpQueryService,

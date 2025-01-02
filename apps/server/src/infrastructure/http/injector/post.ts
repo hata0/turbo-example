@@ -2,7 +2,7 @@ import { PostHttpQueryService } from "@/application/query-service/http/post/post
 import { PostUseCase } from "@/application/use-case/post/use-case";
 import { PostRepository } from "@/interface/repository/post";
 import { PrismaClient } from "@prisma/client";
-import { PostHandler } from "../../../interface/handler/post";
+import { PostController } from "../../../interface/controller/post";
 
 export class PostInjector {
   private readonly postUseCase: PostUseCase;
@@ -16,7 +16,7 @@ export class PostInjector {
     this.postHttpQueryService = new PostHttpQueryService(postRepository);
   }
 
-  get handler(): PostHandler {
-    return new PostHandler(this.postUseCase, this.postHttpQueryService);
+  get controller(): PostController {
+    return new PostController(this.postUseCase, this.postHttpQueryService);
   }
 }
