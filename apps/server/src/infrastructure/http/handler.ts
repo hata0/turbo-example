@@ -27,5 +27,6 @@ export const handleError = (error: Error | HTTPResponseError, c: Context) => {
   if (error instanceof ZodError) {
     return c.json({ message: fromError(error).toString() }, StatusCode.BadRequest);
   }
+  console.error(error);
   return c.json({ message: "Internal server error" }, StatusCode.InternalServerError);
 };
