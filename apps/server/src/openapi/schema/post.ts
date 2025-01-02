@@ -73,12 +73,12 @@ export const UpdatePostBodySchema = z
   .openapi("UpdatePostBody");
 export type UpdatePostBody = z.infer<typeof UpdatePostBodySchema>;
 
-export const DeleteManyPostBodySchema = z
+export const DeleteMultiplePostBodySchema = z
   .object({
     ids: z
       .string()
       .array()
       .openapi({ example: ["abc123def", "random-id"] }),
   })
-  .openapi("DeleteManyPostBody");
-export type DeleteManyPostBody = z.infer<typeof DeleteManyPostBodySchema>;
+  .openapi("DeleteMultiplePostBody");
+export type DeleteMultiplePostBody = z.infer<typeof DeleteMultiplePostBodySchema>;

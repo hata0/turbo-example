@@ -10,7 +10,7 @@ import {
 } from "@/interface/command/http/post";
 import {
   createPostRoute,
-  deleteManyPostRoute,
+  deleteMultiplePostRoute,
   deletePostRoute,
   listPostRoute,
   updatePostRoute,
@@ -94,7 +94,7 @@ export class PostController {
   }
 
   async deleteMultiple(app: OpenAPIHono) {
-    app.openapi(deleteManyPostRoute, async (c) => {
+    app.openapi(deleteMultiplePostRoute, async (c) => {
       const body = c.req.valid("json");
 
       const command = new DeleteMultiplePostHttpCommand(body.ids);

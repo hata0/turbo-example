@@ -2,7 +2,7 @@ import { createRoute } from "@hono/zod-openapi";
 import { ErrorResponseSchema } from "../schema/error";
 import {
   CreatePostBodySchema,
-  DeleteManyPostBodySchema,
+  DeleteMultiplePostBodySchema,
   PostParamsSchema,
   PostResponseSchema,
   PostsQuerySchema,
@@ -222,7 +222,7 @@ export const deletePostRoute = createRoute({
   },
 });
 
-export const deleteManyPostRoute = createRoute({
+export const deleteMultiplePostRoute = createRoute({
   tags: ["posts"],
   method: "delete",
   path: "/posts",
@@ -231,7 +231,7 @@ export const deleteManyPostRoute = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: DeleteManyPostBodySchema,
+          schema: DeleteMultiplePostBodySchema,
         },
       },
       description: "削除するポストのid",
